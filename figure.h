@@ -11,7 +11,9 @@
 class Vehicle{
 public:
     virtual void draw()=0;
-
+    virtual void printin(Point position,int time)=0;
+    virtual void printout(int time)=0;
+    
     void moveup(double *dx,double *dy);
     void movedown(double *dx,double *dy);
     void moveleft(double *dx,double *dy);
@@ -19,8 +21,7 @@ public:
     void zoom(double *width,double *height,double *owidth,double *Radii);
     void getintime(int time);
     void getouttime(int time);
-    void printin(Point position,int time);
-    void printout(int time);
+
 protected:
     Point p;
     double w,h,o,R;
