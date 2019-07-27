@@ -6,7 +6,9 @@
 #define HWX_SHAPE_H
 #include <windows.h>
 #include <GL/freeglut.h>
-typedef struct _Point { double x,y; } Point;
+#include "Vec.h"
+//typedef struct _Point { double x,y; } Point;
+// I move this definition to Vec.h
 class Shape {
 public:
     virtual void draw() = 0;
