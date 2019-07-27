@@ -90,6 +90,14 @@ Car::Car(Point pt1, double width, double height, double owidth, double Radii) {
 Car::~Car() {for(int i=0;i<4;i++) delete sh[i];}
 void Car::draw() {for(int i=0;i<4;i++) sh[i]->draw();}
 
+void Car::printin(Point position,int time){
+    Car::intime=time;
+    cout<<"*************Arrival ticket*************"<<endl;
+    cout<<"* Arrival time: "<<getintime(time)<<endl;
+    cout<<"* Type of vehicle: Car "<<endl;
+    cout<<"* Empty slot: "<<position.x<<","<<position.y<<endl;
+    cout<<"****************************************"<<endl;
+}
 
 void Car::printout(int time) {
     Car::outtime=time;
@@ -111,6 +119,15 @@ Teleported::Teleported(Point pt1, double width, double height) {
 }
 Teleported::~Teleported() {delete sh;}
 void Teleported::draw() {sh->draw();}
+    
+void Teleported::printin(Point position,int time){
+    Teleported::intime=time;
+    cout<<"*************Arrival ticket*************"<<endl;
+    cout<<"* Arrival time: "<<getintime(time)<<endl;
+    cout<<"* Type of vehicle: Teleported "<<endl;
+    cout<<"* Empty slot: "<<position.x<<","<<position.y<<endl;
+    cout<<"****************************************"<<endl;
+}    
     
 void Teleported::printout(int time) {
     Teleported::outtime=time;
@@ -142,6 +159,15 @@ UFO::UFO(Point pt1, double width, double height, double owidth) {
 }
 UFO::~UFO() {for(int i=0;i<=4;i++) delete sh[i];}
 void UFO::draw() {for (int i=0;i<=4;i++) sh[i]->draw();}
+  
+void UFO::printin(Point position,int time){
+    UFO::intime=time;
+    cout<<"*************Arrival ticket*************"<<endl;
+    cout<<"* Arrival time: "<<getintime(time)<<endl;
+    cout<<"* Type of vehicle: UFO "<<endl;
+    cout<<"* Empty slot: "<<position.x<<","<<position.y<<endl;
+    cout<<"****************************************"<<endl;
+}    
     
 void UFO::printout(int time) {
     UFO::outtime=time;
@@ -182,6 +208,15 @@ Spacecraft::Spacecraft(Point pt1, double width, double height, double owidth) {
 }
 Spacecraft::~Spacecraft() {for(int i=0;i<=7;i++) delete sh[i];}
 void Spacecraft::draw() {for(int i=0;i<=7;i++) sh[i]->draw();}
+  
+void Spacecraft::printin(Point position,int time){
+    Spacecraft::intime=time;
+    cout<<"*************Arrival ticket*************"<<endl;
+    cout<<"* Arrival time: "<<getintime(time)<<endl;
+    cout<<"* Type of vehicle: Spacecraft "<<endl;
+    cout<<"* Empty slot: "<<position.x<<","<<position.y<<endl;
+    cout<<"****************************************"<<endl;
+}    
     
 void Spacecraft::printout(int time) {
     Spacecraft::outtime=time;
