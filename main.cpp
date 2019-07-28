@@ -7,7 +7,7 @@
 #include <GL/glut.h>
 #include "Vec.h"
 #include "Shape.h"
-
+#include "parkinglot.h"
 using namespace std;
 
 void timeStep(int step){
