@@ -88,3 +88,11 @@ Point Parkinglot::locate() {
     }
     return {0,0};
 }
+void Parkinglot::leave(Point vehicle) {
+    for (int i=0;i<20;i++){
+        if (vehicle.x==location[i].x && vehicle.y==location->y){
+            plate[i]=true;
+            break;
+        }
+    }
+}
