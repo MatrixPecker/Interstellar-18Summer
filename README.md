@@ -14,19 +14,23 @@ Wu Qinhang 518370910041
 **Version: Milestone 1 (July. 27)**
 
 ## File Structure
-|--main.c
+|--main.cpp
 
 |--Vec.h
 
-|--Vec.c
+|--Vec.cpp
 
 |--shape.h
 
-|--shape.c
+|--shape.cpp
 
 |--figure.h
 
-|--figure.c
+|--figure.cpp
+
+|--parkinglot.cpp
+
+|--parkinglot.h
 
 |--README.md
 
