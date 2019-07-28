@@ -68,10 +68,11 @@ Wu Qinhang 518370910041
 - User interface
   
 ### Final Checklist
-
-
-## (Next Header here)
 - Make Vec class immutable
 - Draw the class inheritance relationship
 - correspond new with delete; check memory leak (Linux)
 - refine README
+
+
+## (Next Header here)
+
