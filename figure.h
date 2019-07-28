@@ -4,8 +4,15 @@
 
 #ifndef HWX_FIGURE_H
 #define HWX_FIGURE_H
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#elif _WIN32
 #include <windows.h>
 #include <GL/freeglut.h>
+#else
+#include <GL/freeglut.h>
+#endif
+
 
 #include "shape.h"
 class Vehicle{
@@ -13,14 +20,13 @@ public:
     virtual void draw()=0;
     virtual void printin(Point position,int time)=0;
     virtual void printout(int time)=0;
-    
     void moveup(double *dx,double *dy);
     void movedown(double *dx,double *dy);
     void moveleft(double *dx,double *dy);
     void moveright(double *dx,double *dy);
     void zoom(double *width,double *height,double *owidth,double *Radii);
-    void getintime(int time);
-    void getouttime(int time);
+    int getintime(int time);
+    int getouttime(int time);
 
 protected:
     Point p;

@@ -4,8 +4,15 @@
 
 #ifndef HWX_SHAPE_H
 #define HWX_SHAPE_H
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#elif _WIN32
 #include <windows.h>
 #include <GL/freeglut.h>
+#else
+#include <GL/freeglut.h>
+#endif
+
 #include "Vec.h"
 //typedef struct _Point { double x,y; } Point;
 // I move this definition to Vec.h

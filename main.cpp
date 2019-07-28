@@ -1,13 +1,20 @@
 //
 // Created by lykku on 2019/7/20.
 //
-
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#elif _WIN32
+#include <windows.h>
+#include <GL/freeglut.h>
+#else
+#include <GL/freeglut.h>
+#endif
 #include <iostream>
 #include <ctime>
-#include <GL/glut.h>
 #include "Vec.h"
-#include "Shape.h"
+#include "shape.h"
 #include "parkinglot.h"
+#include "figure.h"
 using namespace std;
 
 void timeStep(int step){
