@@ -1,0 +1,12 @@
+Project 3 Group8 Changelog
+
+Milestone1 July.28.2019
+What we have done:
+1) the inheritance relationship of the structure of the vehicles, carports and the user interface
+2) design and OpenGL drawing of the vehicles and the parking lot
+3) ticket and fee related issue
+4) fundamental motion functioning of the vehicles (move, rotate, zoom and etc.)
+Things to be implemented soon:
+1) route from the entrance each carport and its relationship with the car motion
+2) function to select available carport and distribute to the entering car
+
