@@ -10,8 +10,8 @@
 #define PI_V  3.14159265358979
 typedef struct _Point { double x,y; } Point;
 
-inline double d2r(double a); // degree to rad
-inline double r2d(double a); // rad  to degree
+double d2r(double a); // degree to rad
+double r2d(double a); // rad  to degree
 void printVec(Point p); // only for debug
 void moveVec(Point *p, Point dir);
 void rotateVec(Point *p, Point center, double degree);

@@ -3,9 +3,7 @@
 //
 
 #include "shape.h"
-#include <windows.h>
-#include <GL/freeglut.h>
-#include <math.h>
+
 //double static PI=3.1415926535;
 int static n=360;
 Shape::~Shape(){}

@@ -1,10 +1,23 @@
+//
+// Created by lykku on 2019/7/20.
+//
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#elif _WIN32
+#include <windows.h>
+#include <GL/freeglut.h>
+#else
+#include <GL/freeglut.h>
+#endif
 #include <iostream>
 #include <ctime>
-using namespace std;
 #include "Vec.h"
 #include "shape.h"
+#include "parkinglot.h"
 #include "figure.h"
 #include "Engine.h"
+using namespace std;
+
 
 void timeStep(int step){
     glutTimerFunc(step, timeStep, step);
@@ -13,43 +26,17 @@ void timeStep(int step){
 void TestDraw1(){
     static double r = 0; r += 10;
 
-    static Point center = {0.2,0.2};//{0.2, 0.4};
+//    static Point center = {0.2,0.2};//{0.2, 0.4};
     Spacecraft sh1({-0.4,0.4},0.3,0.2,0.2/3.0);
-    Home sh2({-0.4,0.0},0.2,0.25,0.012,0.15);
+//    Home sh2({-0.4,0.0},0.2,0.25,0.012,0.15);
     Car sh3({-0.4,-0.4},1.0/3,1.3/3,0.175/3,0.1/3);
     Teleported sh4({0.4,0.4},1.0/3,0.5/3);
     UFO sh5({0.4,-0.4},1.0/3,0.5/3,0.5/3);
-    sh1.rotate({-0.4,0.4},r);sh2.rotate({-0.4,0.0},r);sh3.rotate({-0.4,-0.4},r);sh4.rotate({0.4,0.4},r);sh5.rotate({0.4,-0.4},r);
+    sh1.rotate({-0.4,0.4},r);sh3.rotate({-0.4,-0.4},r);sh4.rotate({0.4,0.4},r);sh5.rotate({0.4,-0.4},r);//sh2.rotate({-0.4,0.0},r);
 
-    sh1.draw();sh2.draw();sh3.draw();sh4.draw();sh5.draw();
+    sh1.draw();sh3.draw();sh4.draw();sh5.draw();//sh2.draw();
 }
-void TestDraw2(){
-    static int tmpTime = 0; tmpTime++;static int flag=0;
-    static double r = 0,lng = 0.01;
-    static Point Csh = {-0.4,-0.4};
-    double movelng[] = {0.3,0.7};
-    Car sh(Csh,1.0/10,1.3/10,0.175/10,0.1/10);
 
-    if(tmpTime <= (int)(movelng[0]/lng)) sh.moveup(&Csh.x,&Csh.y);
-    else if(tmpTime > (int)(movelng[0]/lng) && tmpTime <= (int)(movelng[0]/lng)+90){
-        r -= 1;
-        sh.rotate({-0.3,-0.1},r);
-        if(tmpTime==(int)(movelng[0]/lng)+90) sh.moveln(&Csh.x,&Csh.y,0.1,0.1);
-    }
-    else if(tmpTime > (int)(movelng[0]/lng)+90 && tmpTime <= (int)(movelng[0]/lng)+90+(int)(movelng[1]/lng)){
-        sh.moveright(&Csh.x,&Csh.y);flag=0;
-        sh.Crotate(r);
-    }
-    else if(tmpTime > (int)(movelng[0]/lng)+90+(int)(movelng[1]/lng) && tmpTime <= (int)(movelng[0]/lng)+90+(int)(movelng[1]/lng)+90){
-//        if(tmpTime==(int)(movelng[0]/lng)+90+(int)(movelng[1]/lng)+1) sh.moveln(&Csh.x,&Csh.y,-0.1,-0.1);
-        if(flag==0) {sh.moveln(&Csh.x,&Csh.y,-0.1,-0.1);flag=1;}
-        r += 1;
-        sh.rotate({0.4,-0.1},r);
-    }
-//    else sh.rotate({0.4,-0.1},r);
-
-    sh.draw();
-}
 void glDraw(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 //    Canvas cvs({0,0},step);

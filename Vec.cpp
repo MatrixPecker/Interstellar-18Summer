@@ -3,10 +3,10 @@
 //
 
 #include "Vec.h"
-inline double d2r(double a){
+double d2r(double a){
     return a * PI_V / 180.0;
 }
-inline double r2d(double a){
+double r2d(double a){
     return a * 180.0 / PI_V;
 }
 void printVec(Point p){ // only for debug

@@ -2,12 +2,13 @@
 // Created by lykku on 2019/7/22.
 //
 
-#include "figure.h"
-#include <math.h>
-#include "shape.h"
-
+#include <cmath>
 #include <ctime>
 #include <cstdlib>
+#include "figure.h"
+#include "shape.h"
+#include "Vec.h"
+using namespace std;
 
 void Vehicle::zoom(double *width, double *height, double *owidth,double *Radii){
     int static i=0;
@@ -40,10 +41,17 @@ void Vehicle::moveleft(double *dx, double *dy) {
 void Vehicle::moveright(double *dx, double *dy) {
     p.x+=0.01;*dx=p.x;p.y+=0;*dy=p.y;
 }
-//void Vehicle::moveright() {
-//    p.x+=0.01;p.y+=0;
-//}
 
+int Vehicle::getintime(int time) {
+    intime=time;
+    return intime;
+}
+
+int Vehicle::getouttime(int time){
+    outtime=time;
+    return time;
+}
+  
 Home::Home(Point pt1, double width, double height, double owidth,double Radii){
     float r, g, b; Point p1, p2, p3;
     p=pt1; w=width; h=height; o=owidth; R=Radii;srand(time(0));
@@ -64,7 +72,8 @@ Home::~Home(){ for(int i=0;i<6;i++) delete sh[i]; }
 void Home::rotate(Point center, double degree){for(int i=0;i<6;i++) sh[i]->rotate(center,degree);}
 void Home::draw() {for(int i=0;i<6;i++) sh[i]->draw();}
 
-Car::Car(Point pt1, double width, double height, double owidth, double Radii) {
+Car::Car(Point pt1, double width,
+         double height, double owidth,double Radii) {
     float r, g, b; Point p1, p2, p3,p4;
     p=pt1; w=width; h=height; o=owidth; R=Radii;srand(time(0));
     p1={p.x - w/2,p.y-h/2}; p2={p.x+w/2,p.y+h/2};
@@ -88,7 +97,27 @@ void Car::rotate(Point center, double degree){for(int i=0;i<4;i++) sh[i]->rotate
 void Car::Crotate(double degree){for(int i=0;i<4;i++) sh[i]->rotate(p,degree);}
 void Car::draw() {for(int i=0;i<4;i++) sh[i]->draw();}
 
-Teleported::Teleported(Point pt1, double width, double height) {
+void Car::printin(Point position,int time){
+    Car::intime=time;
+    cout<<"*************Arrival ticket*************"<<endl;
+    cout<<"* Arrival time: "<<getintime(time)<<endl;
+    cout<<"* Type of vehicle: Car "<<endl;
+    cout<<"* Empty slot: "<<position.x<<","<<position.y<<endl;
+    cout<<"****************************************"<<endl;
+}
+
+void Car::printout(int time) {
+    Car::outtime = time;
+    int totaltime = Car::outtime - Car::intime;
+//    double price = totaltime * Car::price;             //different car should have different price standards.
+    cout << "*************Departure ticket*************" << endl;
+    cout << "* Time spent: " << totaltime << endl;
+    cout << "* Price: " << totaltime * Car::price << endl;
+    cout << "* Type of vehicle: Car" << endl;
+    cout << "******************************************" << endl;
+}
+
+Teleported::Teleported(Point pt1,double width,double height) {
     float r,g,b;Point p1,p2;
     p=pt1;w=width;h=height;
     srand(time(NULL));
@@ -99,6 +128,27 @@ Teleported::Teleported(Point pt1, double width, double height) {
 Teleported::~Teleported() {delete sh;}
 void Teleported::draw() {sh->draw();}
 void Teleported::rotate(Point center, double degree){sh->rotate(center,degree);}
+
+void Teleported::printin(Point position,int time){
+    Teleported::intime=time;
+    cout<<"*************Arrival ticket*************"<<endl;
+    cout<<"* Arrival time: "<<getintime(time)<<endl;
+    cout<<"* Type of vehicle: Teleported "<<endl;
+    cout<<"* Empty slot: "<<position.x<<","<<position.y<<endl;
+    cout<<"****************************************"<<endl;
+}    
+    
+void Teleported::printout(int time) {
+    Teleported::outtime = time;
+    int totaltime = Teleported::outtime - Teleported::intime;
+//    double price = totaltime * Teleported::price;             //different car should have different price standards.
+    cout << "*************Departure ticket*************" << endl;
+    cout << "* Time spent: " << totaltime << endl;
+    cout << "* Price: " << totaltime * Teleported::price << endl;
+    cout << "* Type of vehicle: Teleported" << endl;
+    cout << "******************************************" << endl;
+}
+    
 UFO::UFO(Point pt1, double width, double height, double owidth) {
 
     float r, g, b; Point p1, p2, p3,p4;
@@ -118,9 +168,29 @@ UFO::UFO(Point pt1, double width, double height, double owidth) {
     sh[4]=new class Line(p1,p2,r3,g3,b3);
 }
 UFO::~UFO() {for(int i=0;i<=4;i++) delete sh[i];}
-void UFO::draw() {for (int i=0;i<=4;i++) sh[i]->draw();}
 void UFO::rotate(Point center, double degree){for(int i=0;i<5;i++) sh[i]->rotate(center,degree);}
+void UFO::draw() {for (int i=0;i<=4;i++) sh[i]->draw();}
 
+void UFO::printin(Point position,int time){
+    UFO::intime=time;
+    cout<<"*************Arrival ticket*************"<<endl;
+    cout<<"* Arrival time: "<<getintime(time)<<endl;
+    cout<<"* Type of vehicle: UFO "<<endl;
+    cout<<"* Empty slot: "<<position.x<<","<<position.y<<endl;
+    cout<<"****************************************"<<endl;
+}    
+    
+void UFO::printout(int time) {
+    UFO::outtime = time;
+    int totaltime = UFO::outtime - UFO::intime;
+//    double price = totaltime * UFO::price;             //different car should have different price standards.
+    cout << "*************Departure ticket*************" << endl;
+    cout << "* Time spent: " << totaltime << endl;
+    cout << "* Price: " << totaltime * UFO::price << endl;
+    cout << "* Type of vehicle: UFO" << endl;
+    cout << "******************************************" << endl;
+}
+    
 Spacecraft::Spacecraft(Point pt1, double width, double height, double owidth) {
     float r,g,b;Point p1,p2,p3,p4;
     p=pt1;w=width;h=height;o=owidth;
@@ -150,4 +220,24 @@ Spacecraft::Spacecraft(Point pt1, double width, double height, double owidth) {
 }
 Spacecraft::~Spacecraft() {for(int i=0;i<=7;i++) delete sh[i];}
 void Spacecraft::rotate(Point center, double degree){for(int i=0;i<8;i++) sh[i]->rotate(center,degree);}
-void Spacecraft::draw() {for(int i=0;i<8;i++) sh[i]->draw();}
+void Spacecraft::draw() {for(int i=0;i<=7;i++) sh[i]->draw();}
+
+void Spacecraft::printin(Point position,int time){
+    Spacecraft::intime=time;
+    cout<<"*************Arrival ticket*************"<<endl;
+    cout<<"* Arrival time: "<<getintime(time)<<endl;
+    cout<<"* Type of vehicle: Spacecraft "<<endl;
+    cout<<"* Empty slot: "<<position.x<<","<<position.y<<endl;
+    cout<<"****************************************"<<endl;
+}    
+    
+void Spacecraft::printout(int time) {
+    Spacecraft::outtime = time;
+    int totaltime = Spacecraft::outtime - Spacecraft::intime;
+//    double price = totaltime * Spacecraft::price;             //different car should have different price standards.
+    cout << "*************Departure ticket*************" << endl;
+    cout << "* Time spent: " << totaltime << endl;
+    cout << "* Price: " << totaltime * Spacecraft::price << endl;
+    cout << "* Type of vehicle: Spacecraft" << endl;
+    cout << "******************************************" << endl;
+}
