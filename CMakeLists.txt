@@ -12,7 +12,7 @@ include_directories(${OPENGL_INCLUDE_DIR})
 find_package(GLUT REQUIRED)
 include_directories(${GLUT_INCLUDE_DIR})
 
-add_executable(p3 main.cpp Vec.cpp shape.cpp figure.cpp ${SOURCES})
+add_executable(p3 main.cpp Vec.cpp shape.cpp figure.cpp parkinglot.cpp ${SOURCES})
 target_link_libraries(p3 ${GLUT_LIBRARY} ${OPENGL_LIBRARY})
 
 add_executable(test test.cpp Vec.cpp)
