@@ -73,6 +73,17 @@ Wu Qinhang 518370910041
 - correspond new with delete; check memory leak (Linux)
 - refine README
 
+## General setup
+-![Inheritance Relationship:](https://github.com/MatrixPecker/Interstellar-18Summer/blob/master/IR.jpg)
+All the vehicles inherit from a fundamental class and two kinds of carports inherit from a general carport class.
+The motivation is that all the vehicles have some common functions such as move and print tickets, and so do the carports. Thus, it is more efficient to use inheritance relationship.
+- Our interstellar parking lot is designed to be 2 floors, 20 slots in total. All the carports are identical. We consider it to be the size big enough to make full use of all functions and cute enough for the whole process to be clear and concise.
+- There are four kinds of vehicles, car, teleported, UFO and spacecraft, each with its standard functions.
 
-## (Next Header here)
+
+## Highlights
+- Color matching for every car
+
+
+
 
