@@ -11,7 +11,11 @@ Wang Ziyi  518370910073
   
 Wu Qinhang 518370910041
 
-**Version: Milestone 1 (July. 27)**
+**Version: Milestone 1 (July. 28)**
+
+**DDL(Milestone 1): Aug. 2**
+
+**DDL(Final Submission): Aug. 7**
 
 ## File Structure
 |--main.cpp
@@ -46,6 +50,7 @@ Wu Qinhang 518370910041
 - Figure: Parkinglot    [LYK]
 - Route programming    [LYK/WQH]
 - fix main.c and Canvas    [WQH]
+- README maintenance    [GXH]
 ### Milestone 1
 - Ticket    [WZY]
 - Price Calculation    [WZY]
@@ -63,6 +68,9 @@ Wu Qinhang 518370910041
 - User interface
   
 ### Final Checklist
+
+
+## (Next Header here)
 - Make Vec class immutable
 - Draw the class inheritance relationship
 - correspond new with delete; check memory leak (Linux)
