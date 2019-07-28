@@ -11,6 +11,7 @@ public:
     void parkdraw();
     Parkinglot();
     Point locate();
+    void leave(Point vehicle);
 private:
     Shape *sh[70];
     bool plate[20];
