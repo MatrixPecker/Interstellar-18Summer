@@ -58,19 +58,19 @@ Car::Car(Point pt1, double width,
          double height, double owidth,double Radii) {
     float r, g, b; Point p1, p2, p3,p4;
     p=pt1; w=width; h=height; o=owidth; R=Radii;srand(time(0));
-    p1={p.x - w/2,p.y-h/2}; p2={p.x+w/2,p.y+h/2};
+    p1={p.x - w/2,p.y-h/3}; p2={p.x+w/2,p.y+h/3};
     paint(&r,&g,&b);
     float static r1=r,g1=g,b1=b;
     sh[0]=new class Rectangle(p1,p2,r1,g1,b1);
-    p1={p.x-w/2+2*o,p.y+h/2+o}; p2={p.x+w/2-2*o,p.y+h/2+o};p3={p.x+w/2-2*o,p.y+h/2};p4={p.x-w/2,p.y+h/2};
+    p1={p.x+w/2-2*o,p.y+h/3+o}; p2={p.x-w/2+2*o,p.y+h/3+o};p3={p.x-w/2+2*o,p.y+h/3};p4={p.x+w/2,p.y+h/3};
     paint(&r,&g,&b);
     float static r2=r,g2=g,b2=b;
     sh[1]=new class Trapezium(p1,p2,p3,p4,r2,g2,b2);
-    p1={p.x-1.5*o,p.y-h/2};
+    p1={p.x-2*o,p.y-h/3};
     paint(&r,&g,&b);
     float static r3=r,g3=g,b3=b;
     sh[2]=new class Circle(p1,Radii,r3,g3,b3);
-    p1={p.x+1.5*o,p.y-h/2};
+    p1={p.x+2*o,p.y-h/3};
     sh[3]=new class Circle(p1,Radii,r3,g3,b3);
 
 }
