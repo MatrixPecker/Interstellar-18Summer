@@ -52,25 +52,7 @@ int Vehicle::getouttime(int time){
     return time;
 }
   
-Home::Home(Point pt1, double width, double height, double owidth,double Radii){
-    float r, g, b; Point p1, p2, p3;
-    p=pt1; w=width; h=height; o=owidth; R=Radii;srand(time(0));
-    p1={p.x - w/2,p.y-w/2}; p2={p.x+w/2,p.y+w/2};
-    paint(&r,&g,&b); sh[0]=new class Rectangle(p1,p2,r,g,b);
-    p1={p.x-o,p.y-w/2}; p2={p.x+o,p.y};
-    paint(&r,&g,&b); sh[1]=new class Rectangle(p1,p2,r,g,b);
-    p1={p.x-2*o,p.y+o}; p2={p.x-o,p.y+2*o};
-    paint(&r,&g,&b); sh[2]=new class Rectangle(p1,p2,r,g,b);
-    p1={p.x+w/2-2*o,p.y+o}; p2={p.x+w/2-o,p.y+2*o};
-    paint(&r,&g,&b); sh[3]=new class Rectangle(p1,p2,r,g,b);
-    p1={p.x,p.y+h-w/2}; p2={p.x-w/2,p.y+w/2}; p3={p.x+w/2,p.y+w/2};
-    paint(&r,&g,&b); sh[4]=new class Triangle(p1,p2,p3,r,g,b);
-    p1={p.x,p.y};
-    paint(&r,&g,&b);sh[5]=new class Circle(p1,Radii,r,g,b);
-}
-Home::~Home(){ for(int i=0;i<6;i++) delete sh[i]; }
-void Home::rotate(Point center, double degree){for(int i=0;i<6;i++) sh[i]->rotate(center,degree);}
-void Home::draw() {for(int i=0;i<6;i++) sh[i]->draw();}
+
 
 Car::Car(Point pt1, double width,
          double height, double owidth,double Radii) {
