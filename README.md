@@ -51,18 +51,27 @@ Wu Qinhang 518370910041
 ### General
 - ~~Color Table    [GXH]~~
 - ~~Engine: Vec, Rotate    [WQH]~~
-- Figure: Parkinglot    [LYK]
-- Route programming    [LYK/WQH]
-- fix main.c and Canvas    [WQH]
+- First Part of the Parkinglot (the design of a generic parking lot)    [GXH/LYK]
+- ~~Figure: Parkinglot    [LYK]~~
+  - Layer design & fix    [LYK]
+- Size & Scale fix    [?]
+- Shape: barrier blocking    [?]
+- Shape: bicycle, motorbike, car    [?]
 - README maintenance    [GXH]
 - Rotation engine    [WQH]
+  - Map for different slots    [WQH]
+- Route programming    [LYK/WQH]
 ### Milestone 1
 - Ticket    [WZY]
 - Price Calculation    [WZY]
+- Find an empty slot    [?]
 ### Milestone 2
 - ~~Basic shapes    [LYK]~~
 - ~~Figure: vehicles    [LYK]~~
-  
+### Final submission
+- fix main.c and Canvas    [WQH]
+- Interface: specify slots and enter command    [?]
+  - "Not available" symbol on the slot    [?]
 ### Bonus
 - Trajectory recording    [WQH] [pending]
   - simulate the dust tracks; implemented with queue
@@ -70,7 +79,7 @@ Wu Qinhang 518370910041
 - fix inheritance relationship
 - clean the code
 - Motion: teleported (polygon teleporter)
-- User interface
+- Advanced user interface
   
 ### Final Checklist
 - Make Vec class immutable
