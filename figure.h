@@ -40,16 +40,6 @@ protected:
     void zoomin(double *width,double *height,double *owidth,double *Radii);
     void paint(float *r, float *g, float *b);
 };
-class Home: public Vehicle {
-public:
-    Home(Point pt1={0,-.25}, double width=1,
-         double height=1.3, double owidth=.175,double Radii=0.4);
-    ~Home();
-    void draw();
-    void rotate(Point center, double degree);
-private:
-    Shape *sh[6];
-};
 
 class Car:public Vehicle{
 public:
