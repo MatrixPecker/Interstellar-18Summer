@@ -13,7 +13,7 @@ Wu Qinhang 518370910041
 
 **Version: Milestone 1 (July. 28)**
 
-**DDL(Milestone 1): Aug. 2**
+**DDL(Milestone 2): Aug. 2**
 
 **DDL(Final Submission): Aug. 7**
 
@@ -23,6 +23,10 @@ Wu Qinhang 518370910041
 |--Vec.h
 
 |--Vec.cpp
+
+|--Engine.h
+
+|--Engine.cpp
 
 |--shape.h
 
@@ -46,11 +50,12 @@ Wu Qinhang 518370910041
 ## To-do List
 ### General
 - ~~Color Table    [GXH]~~
-- Engine: Vec, Rotate    [WQH]
+- ~~Engine: Vec, Rotate    [WQH]~~
 - Figure: Parkinglot    [LYK]
 - Route programming    [LYK/WQH]
 - fix main.c and Canvas    [WQH]
 - README maintenance    [GXH]
+- Rotation engine    [WQH]
 ### Milestone 1
 - Ticket    [WZY]
 - Price Calculation    [WZY]
