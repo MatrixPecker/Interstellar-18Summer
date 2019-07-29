@@ -16,6 +16,7 @@ find_package(GLUT REQUIRED)
 include_directories(${GLUT_INCLUDE_DIR})
 
 # Build Part 1 of the project (add all of related files)
+add_executable(p3_part1 p3_part1.cpp parkingarea.h parkingarea.cpp normalvehicle.h normalvehicle.cpp)
 
 # Build Part 2 of the project (add all of related files)
 add_executable(p3 main.cpp Vec.cpp Vec.h Engine.cpp Engine.h figure.cpp figure.h shape.cpp shape.h parkinglot.cpp parkinglot.h)
