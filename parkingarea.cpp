@@ -44,7 +44,7 @@ void Parkingarea::moveout(Point p1) {
     }
 }
 
-Parkingarea::~Parkingarea() {
+void Parkingarea::deleteParkingarea() {
     delete []lot;
     delete []lott;
     delete []lottt;
