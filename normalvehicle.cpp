@@ -18,15 +18,17 @@ void Normalvehicle::leave(int time,Parkingarea park) {
     printout();
 }
 void Normalvehicle::printin() {
-    if (position == {0,0,0)){
-        cout << "Sorry, no available slot for " << type << 's.' << endl;
+    if (position.x==0 && position.y==0 && position.floor==0){
+        cout << "Sorry, no available slot for " << type << "s." << endl;
         return;
-    {
-    cout << "*************Arrival ticket*************" << endl;
-    cout << "* Arrival time: " << intime << endl;
-    cout << "* Type of vehicle: " << type << endl;
-    cout << "* Empty slot (x,y,floor) : " << position.x << ',' << position.y << ',' << position.floor << endl;
-    cout << "****************************************" << endl;
+    }
+    else{
+        cout << "*************Arrival ticket*************" << endl;
+        cout << "* Arrival time: " << intime << endl;
+        cout << "* Type of vehicle: " << type << endl;
+        cout << "* Empty slot (x,y,floor) : " << position.x << ',' << position.y << ',' << position.floor << endl;
+        cout << "****************************************" << endl;
+    }
 }
 void Normalvehicle::printout() {
     cout << "*************Departure ticket*************" << endl;
