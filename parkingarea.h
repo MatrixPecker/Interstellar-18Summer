@@ -13,7 +13,7 @@ public:
     Point offerlot(string type);
     void moveout(Point p1);
     Parkingarea(int n);
-    ~Parkingarea();
+    void deleteParkingarea();
 private:
     int slots=100;
     Point *lot=new Point[slots];
