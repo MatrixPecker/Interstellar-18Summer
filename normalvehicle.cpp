@@ -18,10 +18,18 @@ void Normalvehicle::leave(int time,Parkingarea park) {
     printout();
 }
 void Normalvehicle::printin() {
-    cout<<intime<<endl<<position.x<<' '<<position.y<<' '<<position.floor<<endl;
+    cout << "*************Arrival ticket*************" << endl;
+    cout << "* Arrival time: " << intime << endl;
+    cout << "* Type of vehicle: " << type << endl;
+    cout << "* Empty slot (x,y,floor) : " << position.x << ',' << position.y << ',' << position.floor << endl;
+    cout << "****************************************" << endl;
 }
 void Normalvehicle::printout() {
-    cout<<(outtime-intime)*money<<endl;
+    cout << "*************Departure ticket*************" << endl;
+    cout << "* Time spent: " << outtime-intime << endl;
+    cout << "* Type of vehicle: " <<type<< endl;
+    cout << "* Price: "<<(outtime-intime)*money<<endl;
+    cout << "******************************************" << endl;
 }
 Car::Car() {
     type="Car";
