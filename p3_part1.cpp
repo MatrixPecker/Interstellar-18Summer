@@ -9,10 +9,10 @@
 #include "normalvehicle.h"
 using namespace std;
 void autoshow(){
-    int in=0,sum=0,out=0;
+    int in=0,out=0;
     Car car1;
     Normalvehicle *vehicle=new Normalvehicle[100];
-    Parkingarea park(100);
+    Parkingarea park(20);
     int cartype;
     int ran=0;
     srand(time(NULL));
@@ -26,7 +26,6 @@ void autoshow(){
                 break;
             case 1:
                 cartype = rand() % 4;
-                sum++;
                 //cout<<"cartype"<<cartype<<endl;
                 if (cartype == 0) {
                     Van car;
@@ -48,15 +47,17 @@ void autoshow(){
                 in++;
                 break;
             case 2:
-                if (sum == 0) cout<<"No car"<<endl;
+                if (in == 0) cout<<"No car"<<endl;
                 else {
-                    out = rand() % sum;
+                    out = rand() % in;
                     //cout<<out<<endl;
                     vehicle[out].leave(i, park);
-                    for (int j = out; j <= sum - 2; j++) {
-                        vehicle[j] = vehicle[j + 1];
+                    if (in>=2){
+                        for (int j = out; j <= in - 2; j++) {
+                            vehicle[j] = vehicle[j + 1];
+                        }
                     }
-                    sum--;
+                    in--;
                 }
                 break;
         }
