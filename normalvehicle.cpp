@@ -23,19 +23,23 @@ void Normalvehicle::printin() {
         return;
     }
     else{
+        cout << endl;
         cout << "*************Arrival ticket*************" << endl;
         cout << "* Arrival time: " << intime << endl;
         cout << "* Type of vehicle: " << type << endl;
         cout << "* Empty slot (x,y,floor) : " << position.x << ',' << position.y << ',' << position.floor << endl;
         cout << "****************************************" << endl;
+        cout << endl;
     }
 }
 void Normalvehicle::printout() {
+    cout << endl;
     cout << "*************Departure ticket*************" << endl;
     cout << "* Time spent: " << outtime-intime << endl;
     cout << "* Type of vehicle: " <<type<< endl;
     cout << "* Price: "<<(outtime-intime)*money<<endl;
     cout << "******************************************" << endl;
+    cout << endl;
 }
 Car::Car() {
     type="Car";
