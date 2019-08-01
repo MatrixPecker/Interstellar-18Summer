@@ -1,5 +1,5 @@
 //
-// Created by lykku on 2019/7/29。
+// Created by lykku on 2019/7/29.
 // Edited by GXH on 2019/8/1.
 //
 
@@ -79,6 +79,20 @@ inline void anotherleavetime(int* leavetime){
     cin >> *leavetime;
 }
 
+inline void anotherparknum(int* parknum){
+    cout << "Please enter a number qualified." << endl;
+    cout << "For the game, how many slots do you want the parking lot to have?" << endl;
+    cout << "(Enter an integer between 5 to 100.)" << endl;
+    cin >> *parknum;
+}
+
+inline void anotherroundnum(int* roundnum){
+    cout << "Please enter a number qualified." << endl;
+    cout << "How many rounds do you want to have?" << endl;
+    cout << "(Enter an integer between 1 and 20.)" << endl;
+    cin >> *roundnum;
+}
+
 typedef struct _normalvehicle {
     Normalvehicle vehicle;
     int leavetime = -1;
@@ -86,19 +100,35 @@ typedef struct _normalvehicle {
 
 void interact(){
     int in=0;
-    normalvehicle * Vehicle = new ( normalvehicle  [100] );
-    Parkingarea park(20);
     int cartype=-1;
     int leavetime=-1;
     cout << endl << "******Welcome to our parking lot!******"<<endl;
-    cout << endl << "Our parking lot has 20 slots in total." << endl;
-    cout << "There are 10 rounds, and you can decide the vehicles entering at each round." << endl;
-    cout << endl << "Press Enter to start the game!" << endl;
+
+    //Set the slots number
+    int parknum=0;
+    cout << endl << "For the game, how many slots do you want the parking lot to have?" << endl;
+    cout << "(Enter an integer between 5 to 100.)" << endl;
+    cin >> parknum;
+    while ( parknum<5 || parknum>100 ) anotherparknum(&parknum);
+    Parkingarea park(parknum);
+
+    //Set the round number
+    int roundnum=0;
+    cout << "How many rounds do you want to have?" << endl;
+    cout << "(Enter an integer between 1 and 20.)" << endl;
+    cin >> roundnum;
+    while ( roundnum<1 || roundnum>20 ) anotherroundnum(&roundnum);
     cin.get();
-    for (int i=1 ; i<=10 ; i++){
-        cout << endl << "******Round " << i << "******" << endl;
+    normalvehicle * Vehicle = new ( normalvehicle  [200] );
+
+    //Starts the game
+    cout << endl <<"For each round, you may decide the vehicles entering and when they leave." << endl;
+    cout << "Press Enter to start the game!" << endl;
+    cin.get();
+    for (int i=1 ; i<=roundnum ; i++){
+        cout << endl << "******Round " << i << "/" << roundnum << "******" << endl;
         //cars leaving
-        for (int j=0 ; j<100 ; j++) {
+        for (int j=0 ; j<200 ; j++) {
             if (Vehicle[j].leavetime == i)
                 Vehicle[j].vehicle.leave(i, park);
         }
@@ -132,7 +162,7 @@ void interact(){
                     Vehicle[in].leavetime = leavetime;
                     (Vehicle[in].vehicle).requirelot(i, park);
                     in++;
-                } else if (cartype==4){
+                }else if (cartype==4){
                     Bicycle car;
                     Vehicle[in].vehicle = car;
                     Vehicle[in].leavetime = leavetime;
@@ -156,7 +186,6 @@ int main(){
         << "Enter other numbers to break." << endl;
 
     cin >> i;
-    cin.get();
     switch (i){
         case 1:
             autoshow(); break;
