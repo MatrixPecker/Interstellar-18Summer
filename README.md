@@ -106,15 +106,16 @@ The motivation is that all the vehicles have some common functions such as move 
 User has three options, which are Enter 1 to begin the autoshow, Enter 2 to play the game and Enter other numbers to break.
 Before the game begining, user can choose how many slots he/she wants(the number should between 5 and 100), how many rounds he/she wants(the number should between 1 and 20).
 When the first round begin, the user can let cars come in and choose which round the car will leave. More than one car or no car can come at one round. One round ends when user enters 0. After the car coming in, an arrival ticket will be provided like 
-              Arrival ticket
+             **Arrival ticket**
 * Arrival time: 1
 * Type of vehicle: Motorbike
 * Empty slot (x,y,floor) : 4,1,1
 
 which includs the arrival time, type of the car and the empty slot the car can stop.
 After that, if the user wants the car to leave at the fifth round, an departure ticket will be provided when the fifth round begins, which is shown as
-              Departure ticket
+           **Departure ticket**
 * Time spent: 4
 * Type of vehicle: Motorbike
 * Price: 8
-which includes how long this kind of car was parked and how much it cost.
+
+*which includes how long this kind of car was parked and how much it cost.
