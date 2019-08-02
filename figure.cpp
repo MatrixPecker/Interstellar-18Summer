@@ -10,6 +10,12 @@
 #include "Vec.h"
 using namespace std;
 
+void Vehicle::rescale(double coefficient) {
+    w *= coefficient;
+    h *= coefficient;
+    o *= coefficient;
+    R *= coefficient;
+}
 void Vehicle::zoom(double *width, double *height, double *owidth,double *Radii){
     int static i=0;
     if(h>=0.1 && i==0) zoomout(width, height, owidth,Radii);
@@ -25,6 +31,9 @@ void Vehicle::zoomin(double *width, double *height, double *owidth,double *Radii
 void Vehicle::paint(float *r, float *g, float *b) {
     *r=(float)rand()/RAND_MAX; *g=(float)rand()/RAND_MAX;
     *b=(float)rand()/RAND_MAX;
+}
+void Vehicle::setpos(Point pos){
+    p.x=pos.x; p.y=pos.y;
 }
 void Vehicle::moveln(double *dx,double *dy,double lnx,double lny){
     p.x+=lnx;*dx=p.x;p.y+=lny;*dy=p.y;
@@ -51,13 +60,12 @@ int Vehicle::getouttime(int time){
     outtime=time;
     return time;
 }
-  
-
+Vehicle::~Vehicle(){}
 
 Car::Car(Point pt1, double width,
          double height, double owidth,double Radii) {
     float r, g, b; Point p1, p2, p3,p4;
-    p=pt1; w=width; h=height; o=owidth; R=Radii;srand(time(0));
+    p=pt1; w=width; h=height; o=owidth; R=Radii; //srand(time(0));
     p1={p.x - w/2,p.y-h/3}; p2={p.x+w/2,p.y+h/3};
     paint(&r,&g,&b);
     float static r1=r,g1=g,b1=b;
@@ -72,9 +80,20 @@ Car::Car(Point pt1, double width,
     sh[2]=new class Circle(p1,Radii,r3,g3,b3);
     p1={p.x+2*o,p.y-h/3};
     sh[3]=new class Circle(p1,Radii,r3,g3,b3);
-
+    inrot = 90; // counter-clockwise 90 degrees
 }
 Car::~Car() {for(int i=0;i<4;i++) delete sh[i];}
+void Car::reset(){
+    Point p1,p2,p3,p4;
+    p1={p.x - w/2,p.y-h/3}; p2={p.x+w/2,p.y+h/3};
+    ((class Rectangle*)sh[0])->reset(p1,p2);
+    p1={p.x+w/2-2*o,p.y+h/3+o}; p2={p.x-w/2+2*o,p.y+h/3+o};p3={p.x-w/2+2*o,p.y+h/3};p4={p.x+w/2,p.y+h/3};
+    ((Trapezium*)sh[1])->reset(p1,p2,p3,p4);
+    p1={p.x-2*o,p.y-h/3};
+    ((Circle*)sh[2])->reset(p1,R);
+    p1={p.x+2*o,p.y-h/3};
+    ((Circle*)sh[3])->reset(p1,R);
+}
 void Car::rotate(Point center, double degree){for(int i=0;i<4;i++) sh[i]->rotate(center,degree);}
 void Car::Crotate(double degree){for(int i=0;i<4;i++) sh[i]->rotate(p,degree);}
 void Car::draw() {for(int i=0;i<4;i++) sh[i]->draw();}
@@ -101,13 +120,19 @@ void Car::printout(int time) {
 
 Teleported::Teleported(Point pt1,double width,double height) {
     float r,g,b;Point p1,p2;
-    p=pt1;w=width;h=height;
+    p=pt1;w=width;h=height;o=-1;R=-1;
     srand(time(NULL));
     p1={p.x - w/2,p.y-h/2}; p2={p.x+w/2,p.y+h/2};
     paint(&r,&g,&b);
     sh=new class Rectangle(p1,p2,r,g,b);
+    inrot = 0; // counter-clockwise 0 degree
 }
 Teleported::~Teleported() {delete sh;}
+void Teleported::reset() {
+    Point p1,p2;
+    p1={p.x - w/2,p.y-h/2}; p2={p.x+w/2,p.y+h/2};
+    ((class Rectangle*)sh)->reset(p1,p2);
+}
 void Teleported::draw() {sh->draw();}
 void Teleported::rotate(Point center, double degree){sh->rotate(center,degree);}
 
@@ -134,7 +159,7 @@ void Teleported::printout(int time) {
 UFO::UFO(Point pt1, double width, double height, double owidth) {
 
     float r, g, b; Point p1, p2, p3,p4;
-    p=pt1; w=width; h=height; o=owidth;
+    p=pt1; w=width; h=height; o=owidth; R=-1;
     p1={p.x,p.y-h/2};
     paint(&r,&g,&b);float static r1=r,g1=g,b1=b;
     sh[0]=new class Semicircle(p1,w/2,r1,g1,b1);
@@ -148,8 +173,22 @@ UFO::UFO(Point pt1, double width, double height, double owidth) {
     sh[3]=new class Line(p1,p2,r3,g3,b3);
     p1={p.x+w/4,p.y-h/2+w/2-o/4};p2={p.x+w/2,p.y-h/2+w/2+o/2};
     sh[4]=new class Line(p1,p2,r3,g3,b3);
+    inrot = 0; // counter-clockwise 0 degree
 }
 UFO::~UFO() {for(int i=0;i<=4;i++) delete sh[i];}
+void UFO::reset() {
+    Point p1,p2,p3,p4;
+    p1={p.x,p.y-h/2};
+    ((class Semicircle*)sh[0])->reset(p1,w/2);
+    p1={p.x-w/2+2*o/3,p.y-h/2};p2={p.x-2*o/3,p.y-h/2};p3={p.x-o/3,p.y-h/2-o/2};p4={p.x-w/2+o/3,p.y-h/2-o/2};
+    ((class Trapezium*)sh[1])->reset(p1,p2,p3,p4);
+    p1={p.x+w/2-o*2/3,p.y-h/2};p2={p.x+o*2/3,p.y-h/2};p3={p.x+o/3,p.y-h/2-o/2};p4={p.x+w/2-o/3,p.y-h/2-o/2};
+    ((class Trapezium*)sh[2])->reset(p1,p2,p3,p4);
+    p1={p.x-w/4,p.y-h/2+w/2-o/4};p2={p.x-w/2,p.y-h/2+w/2+o/2};
+    ((class Line*)sh[3])->reset(p1,p2);
+    p1={p.x+w/4,p.y-h/2+w/2-o/4};p2={p.x+w/2,p.y-h/2+w/2+o/2};
+    ((class Rectangle*)sh[4])->reset(p1,p2);
+}
 void UFO::rotate(Point center, double degree){for(int i=0;i<5;i++) sh[i]->rotate(center,degree);}
 void UFO::draw() {for (int i=0;i<=4;i++) sh[i]->draw();}
 
@@ -175,7 +214,7 @@ void UFO::printout(int time) {
     
 Spacecraft::Spacecraft(Point pt1, double width, double height, double owidth) {
     float r,g,b;Point p1,p2,p3,p4;
-    p=pt1;w=width;h=height;o=owidth;
+    p=pt1;w=width;h=height;o=owidth;R=-1;
     p1={p.x-w/2+o,p.y-h/4};p2={p.x+w/2-o,p.y+h/4};
     paint(&r,&g,&b);float static r1=r,g1=g,b1=b;
     sh[0]=new class Rectangle(p1,p2,r1,g1,b1);
@@ -198,9 +237,28 @@ Spacecraft::Spacecraft(Point pt1, double width, double height, double owidth) {
     p1={p.x-w/2+o,p.y+h/5};p2={p.x-w/2+o,p.y-h/5};p3={p.x-w/2+o/2,p.y-h/4};p4={p.x-w/2+o/2,p.y+h/4};
     paint(&r,&g,&b);float static r6=r,g6=g,b6=b;
     sh[7]=new class Trapezium(p1,p2,p3,p4,r6,g6,b6);
-
+    inrot = 0; // counter-clockwise 0 degree
 }
 Spacecraft::~Spacecraft() {for(int i=0;i<=7;i++) delete sh[i];}
+void Spacecraft::reset() {
+    Point p1,p2,p3,p4;
+    p1={p.x-w/2+o,p.y-h/4};p2={p.x+w/2-o,p.y+h/4};
+    ((class Rectangle*)sh[0])->reset(p1,p2);
+    p1={p.x+w/2-o,p.y+h/4};p2={p.x+w/2-o,p.y-h/4};p3={p.x+w/2,p.y};
+    ((class Triangle*)sh[1])->reset(p1,p2,p3);
+    p1={p.x,p.y-h/10};p2={p.x+w/8,p.y+h/10};
+    ((class Rectangle*)sh[2])->reset(p1,p2);
+    p1={p.x+w/6,p.y+h/8};p2={p.x+w/5,p.y+h/6};
+    ((class Rectangle*)sh[3])->reset(p1,p2);
+    p1={p.x+w/6,p.y-h/8};p2={p.x+w/5,p.y-h/6};
+    ((class Rectangle*)sh[4])->reset(p1,p2);
+    p1={p.x,p.y+h/4};p2={p.x-w/2+o,p.y+h/4};p3={p.x-w/2+o,p.y+h/2};
+    ((class Triangle*)sh[5])->reset(p1,p2,p3);
+    p1={p.x,p.y-h/4};p2={p.x-w/2+o,p.y-h/4};p3={p.x-w/2+o,p.y-h/2};
+    ((class Triangle*)sh[6])->reset(p1,p2,p3);
+    p1={p.x-w/2+o,p.y+h/5};p2={p.x-w/2+o,p.y-h/5};p3={p.x-w/2+o/2,p.y-h/4};p4={p.x-w/2+o/2,p.y+h/4};
+    ((class Trapezium*)sh[7])->reset(p1,p2,p3,p4);
+}
 void Spacecraft::rotate(Point center, double degree){for(int i=0;i<8;i++) sh[i]->rotate(center,degree);}
 void Spacecraft::draw() {for(int i=0;i<=7;i++) sh[i]->draw();}
 

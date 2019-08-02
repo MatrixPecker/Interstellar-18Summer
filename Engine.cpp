@@ -5,8 +5,28 @@
 #include "Engine.h"
 #include "Vec.h"
 #include "figure.h"
+void parkIN(){
+    /* Forward */
+//    switch (n)
+    //switch
+    /* Rotate */
+    /* Backward */
+}
+void parkOUT(){
+    /* Forward */
+    /* Rotate */
+    /* Forward */
+}
+void passSector(){
 
-void TestDraw2(){
+}
+void lotIN(){
+
+}
+void lotOUT(){
+
+}
+void TestDraw2(){ // only for demonstration of the combined movement
     static int tmpTime = 0; tmpTime++;static int flag=0;
     static double r = 0,lng = 0.01;
     static Point Csh = {-0.4,-0.4};
@@ -30,6 +50,5 @@ void TestDraw2(){
         sh.rotate({0.4,-0.1},r);
     }
 //    else sh.rotate({0.4,-0.1},r);
-
     sh.draw();
 }

@@ -16,39 +16,37 @@
 #include "parkinglot.h"
 #include "figure.h"
 #include "Engine.h"
+#include "Canvas.h"
 using namespace std;
-
 
 void timeStep(int step){
     glutTimerFunc(step, timeStep, step);
     glutPostRedisplay();
 }
-void TestDraw1(){
+void TestDraw1(){ // only for demonstration of the rotation of single figures
     static double r = 0; r += 10;
 
-//    static Point center = {0.2,0.2};//{0.2, 0.4};
     Spacecraft sh1({-0.4,0.4},0.3,0.2,0.2/3.0);
-//    Home sh2({-0.4,0.0},0.2,0.25,0.012,0.15);
     Car sh3({-0.4,-0.4},1.0/3,1.3/3,0.175/3,0.1/3);
     Teleported sh4({0.4,0.4},1.0/3,0.5/3);
     UFO sh5({0.4,-0.4},1.0/3,0.5/3,0.5/3);
-    sh1.rotate({-0.4,0.4},r);sh3.rotate({-0.4,-0.4},r);sh4.rotate({0.4,0.4},r);sh5.rotate({0.4,-0.4},r);//sh2.rotate({-0.4,0.0},r);
+    sh1.rotate({-0.4,0.4},r);sh3.rotate({-0.4,-0.4},r);sh4.rotate({0.4,0.4},r);sh5.rotate({0.4,-0.4},r);
 
-    sh1.draw();sh3.draw();sh4.draw();sh5.draw();//sh2.draw();
+    sh1.draw();sh3.draw();sh4.draw();sh5.draw();
 }
-
 void glDraw(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//    Canvas cvs({0,0},step);
-//    cvs.move(&step);
-    TestDraw2();
-//    cvs.draw();
+    static int timenow = 0; timenow++;
+    static Canvas cvs;
+    cvs.change(timenow);
+    cvs.draw();
+
+//    TestDraw2();
     glutSwapBuffers(); glFlush();
 }
 
 int main(int argc, char** argv){
     srand(time(nullptr));
-
     // Init window
 
     // step function

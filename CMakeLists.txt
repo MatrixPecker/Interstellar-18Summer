@@ -19,7 +19,7 @@ include_directories(${GLUT_INCLUDE_DIR})
 add_executable(p3_part1 p3_part1.cpp parkingarea.h parkingarea.cpp normalvehicle.h normalvehicle.cpp)
 
 # Build Part 2 of the project (add all of related files)
-add_executable(p3 main.cpp Vec.cpp Vec.h Engine.cpp Engine.h figure.cpp figure.h shape.cpp shape.h parkinglot.cpp parkinglot.h)
+add_executable(p3 main.cpp Vec.cpp Vec.h Engine.cpp Engine.h Canvas.cpp Canvas.h figure.cpp figure.h shape.cpp shape.h parkinglot.cpp parkinglot.h)
 
 # Link the OpenGL, GLUT and Maths library to your project (don't modify)
 target_link_libraries(p3 ${GLUT_LIBRARY} ${OPENGL_LIBRARY} m)

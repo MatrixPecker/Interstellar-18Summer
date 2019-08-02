@@ -81,6 +81,9 @@ Parkinglot::Parkinglot() {
     location[10]={0.8,0.3};location[11]={0.68,0.3};location[12]={0.56,0.3};location[13]={0.44,0.3};location[14]={0.32,0.3};
     location[19]={-0.8,0.3};location[18]={-0.68,0.3};location[17]={-0.56,0.3};location[16]={-0.44,0.3};location[15]={-0.32,0.3};
 }
+Parkinglot::~Parkinglot() {
+    for(int i=0;i<68;i++) delete sh[i];
+}
 void Parkinglot::parkdraw() {for(int i=0;i<=67;i++) sh[i]->draw();}
 Point Parkinglot::locate() {
     for (int i=0;i<=19;i++)

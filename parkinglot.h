@@ -12,6 +12,7 @@ public:
     Parkinglot();
     Point locate();
     void leave(Point vehicle);
+    ~Parkinglot();
 private:
     Shape *sh[70];
     bool plate[20];
