@@ -98,3 +98,23 @@ void Parkinglot::leave(Point vehicle) {
         }
     }
 }
+
+void Parkinglot::drawoccupy(Point point)
+{
+    Shape *oc[2];
+    oc[0]=new class Line({point.x-.05,point.y-.05},{point.x+.05,point.y+.05},0,0,0);
+    oc[1]=new class Line({point.x-.05,point.y+.05},{point.x+.05,point.y-.05},0,0,0);
+    oc[0]->draw();
+    oc[1]->draw();
+}
+
+void Parkinglot::occupy(int num) {
+    srand(time(NULL));
+    int n=20-num;
+    for (int i=0;i<n;++i)
+    {
+        int h=rand()%19;
+        plate[h]=false;
+        drawoccupy(location[h]);
+    }
+}
