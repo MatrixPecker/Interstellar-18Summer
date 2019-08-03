@@ -10,6 +10,12 @@ Shape::~Shape(){}
 Circle::Circle(Point pt1, double Radii,float red, float green, float blue) {
     p1=pt1;r=red;g=green;b=blue;R=Radii;
 }
+void Circle::reset(Point pt1, double Radii){
+    p1=pt1;R=Radii;
+}
+void Circle::supermove(double dx, double dy){
+    moveVec(&p1,{dx,dy});
+}
 void Circle::rotate(Point center, double degree){
     rotateVec(&p1, center, degree);
 }
@@ -25,9 +31,15 @@ void Circle::draw() {
 Semicircle::Semicircle(Point pt1, double Radii,float red, float green, float blue) {
     p1=pt1;r=red;g=green;b=blue;R=Radii;cir=0;
 }
+void Semicircle::reset(Point pt1, double Radii) {
+    p1=pt1;R=Radii;cir=0;
+}
+void Semicircle::supermove(double dx, double dy){
+    moveVec(&p1,{dx,dy});
+}
 void Semicircle::rotate(Point center, double degree){
     rotateVec(&p1, center, degree);
-    cir=degree;
+    cir+=degree;if(cir>365)cir-=360;
     // new feature needed: add property "DEGREE" in Semicircle
 }
 void Semicircle::draw() {
@@ -42,6 +54,13 @@ void Semicircle::draw() {
 Line::Line(Point pt1, Point pt2, float red, float green, float blue) {
     p1=pt1;p2=pt2;r=red;g=green; b = blue;
 }
+void Line::reset(Point pt1, Point pt2){
+    p1=pt1;p2=pt2;
+}
+void Line::supermove(double dx, double dy){
+    moveVec(&p1,{dx,dy});
+    moveVec(&p2,{dx,dy});
+}
 void Line::rotate(Point center, double degree){
     rotateVec(&p1, center, degree);
     rotateVec(&p2, center, degree);
@@ -52,6 +71,15 @@ void Line::draw() {
 }
 Rectangle::Rectangle(Point pt1, Point pt2,float red, float green, float blue) {
     p1=pt1; p3=pt2; r=red; g=green; b=blue; p2={p3.x,p1.y}; p4={p1.x,p3.y};
+}
+void Rectangle::reset(Point pt1, Point pt2){
+    p1=pt1; p3=pt2; p2={p3.x,p1.y}; p4={p1.x,p3.y};
+}
+void Rectangle::supermove(double dx, double dy){
+    moveVec(&p1,{dx,dy});
+    moveVec(&p2,{dx,dy});
+    moveVec(&p3,{dx,dy});
+    moveVec(&p4,{dx,dy});
 }
 void Rectangle::rotate(Point center, double degree){
     rotateVec(&p1, center, degree);
@@ -67,6 +95,14 @@ void Rectangle::draw() {
 Triangle::Triangle(Point pt1, Point pt2, Point pt3,float red, float green, float blue) {
     p1=pt1; p2=pt2; p3=pt3; r=red; g=green; b=blue;
 }
+void Triangle::reset(Point pt1, Point pt2, Point pt3){
+    p1=pt1; p2=pt2; p3=pt3;
+}
+void Triangle::supermove(double dx, double dy){
+    moveVec(&p1,{dx,dy});
+    moveVec(&p2,{dx,dy});
+    moveVec(&p3,{dx,dy});
+}
 void Triangle::rotate(Point center, double degree){
     rotateVec(&p1, center, degree);
     rotateVec(&p2, center, degree);
@@ -79,6 +115,15 @@ void Triangle::draw() {
 }
 Parallelogram::Parallelogram(Point pt1, Point pt2, Point pt3, Point pt4, float red, float green, float blue) {
     p1=pt1;p1=pt2;p3=pt3;p4=pt4;r=red;g=green;b=blue;
+}
+void Parallelogram::reset(Point pt1, Point pt2, Point pt3, Point pt4) {
+    p1=pt1;p1=pt2;p3=pt3;p4=pt4;
+}
+void Parallelogram::supermove(double dx, double dy){
+    moveVec(&p1,{dx,dy});
+    moveVec(&p2,{dx,dy});
+    moveVec(&p3,{dx,dy});
+    moveVec(&p4,{dx,dy});
 }
 void Parallelogram::rotate(Point center, double degree){
     rotateVec(&p1, center, degree);
@@ -93,6 +138,15 @@ void Parallelogram::draw() {
 }
 Trapezium::Trapezium(Point pt1, Point pt2, Point pt3, Point pt4, float red, float green, float blue) {
     p1=pt1;p2=pt2;p3=pt3;p4=pt4;r=red;g=green;b=blue;
+}
+void Trapezium::reset(Point pt1, Point pt2, Point pt3, Point pt4){
+    p1=pt1;p2=pt2;p3=pt3;p4=pt4;
+}
+void Trapezium::supermove(double dx, double dy){
+    moveVec(&p1,{dx,dy});
+    moveVec(&p2,{dx,dy});
+    moveVec(&p3,{dx,dy});
+    moveVec(&p4,{dx,dy});
 }
 void Trapezium::rotate(Point center, double degree){
     rotateVec(&p1, center, degree);
