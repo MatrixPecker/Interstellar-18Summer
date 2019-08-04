@@ -3,7 +3,58 @@
 //
 
 #include "Canvas.h"
-
+void Canvas::settmptype(int *temtype,int num) {
+    srand(time(NULL));
+    int ran = 0;
+    temtype[0]=TYPE_TELEPORTED;temtype[1]=TYPE_TELEPORTED;
+    temtype[2]=TYPE_SPACECRAFT;temtype[3]=TYPE_SPACECRAFT;
+    for (int i = 4; i < num; i++) {
+        ran = rand() % 3;
+        switch (ran) {
+            case 0:
+                temtype[i] = TYPE_CAR;
+                break;
+            case 1:
+                temtype[i] = TYPE_SPACECRAFT;
+                break;
+            case 2:
+                temtype[i] = TYPE_UFO;
+        }
+    }
+}
+void Canvas::settmptime(int *tmpin, int *tmpout, int num) {
+    int ran=0;
+    srand(time(NULL));
+    tmpin[0]=0;tmpin[1]=0;tmpin[2]=0;tmpin[3]=0;tmpin[4]=125;tmpin[5]=325;
+    tmpout[0]=9000;tmpout[1]=9000;tmpout[2]=9000;tmpout[3]=9000;tmpout[4]=9000;tmpout[5]=9000;
+    for (int i=6;i<num;i++){
+        ran=rand()%200+(i-3)*200;
+        tmpin[i]=ran;
+        do {
+            ran=rand()%(vnum*2000);
+            tmpout[i]=ran;
+        }while ((tmpout[i]-tmpin[i])<300);
+    }
+}
+void Canvas::settmplot(int *tmplot, int num) {
+    int ran=0;
+    bool judge=true;
+    srand(time(NULL));
+    tmplot[0]=rand()%23+1;
+    for (int i=1;i<num;i++){
+        do{
+        ran=rand()%23+1;
+        for (int j=0;j<i;j++) {
+            if (tmplot[j] == ran) {
+                judge = false;
+                break;
+            }
+            else judge=true;
+        }
+        }while (judge==false);
+        tmplot[i]=ran;
+    }
+}
 Canvas::Canvas() {
 /* Set Static Coordinates */
     c = new Cdata;
@@ -56,27 +107,49 @@ Canvas::Canvas() {
     for(int i=0;i<5;i++) c->SLNG_SEC6A[i]=pa5[i];
 
 /* Set Vehicles */
-    vnum = 7;
-    int tmptype[]={TYPE_CAR,TYPE_UFO,TYPE_SPACECRAFT,TYPE_CAR,TYPE_CAR,TYPE_CAR,TYPE_CAR};
-    for(int i=0;i<vnum;i++) switch(tmptype[i]){
-        case TYPE_CAR: v[i] = new Car; v[i]->settype(TYPE_CAR); break;
-        case TYPE_UFO: v[i] = new UFO; v[i]->settype(TYPE_UFO); break;
-        case TYPE_SPACECRAFT: v[i] = new Spacecraft; v[i]->settype(TYPE_SPACECRAFT); break;
-        case TYPE_TELEPORTED: v[i] = new Teleported; v[i]->settype(TYPE_TELEPORTED); break;
-        // Teleported Init.: special judge needed
+    vnum = 10;
+    int *tmptype=new int[vnum];
+    settmptype(tmptype,vnum);
+    for(int i=0;i<vnum;i++) {
+        switch (tmptype[i]) {
+            case TYPE_CAR:
+                v[i] = new Car;
+                v[i]->settype(TYPE_CAR);
+                break;
+            case TYPE_UFO:
+                v[i] = new UFO;
+                v[i]->settype(TYPE_UFO);
+                break;
+            case TYPE_SPACECRAFT:
+                v[i] = new Spacecraft;
+                v[i]->settype(TYPE_SPACECRAFT);
+                break;
+            case TYPE_TELEPORTED:
+                v[i] = new Teleported;
+                v[i]->settype(TYPE_TELEPORTED);
+                break;
+                // Teleported Init.: special judge needed
+        }
     }
     for(int i=0;i<vnum;i++) v[i]->setpos(c->INITCENTER);
-    for(int i=0;i<vnum;i++) switch(v[i]->gettype()){
+    /*for(int i=0;i<vnum;i++) switch(v[i]->gettype()){
             case TYPE_CAR: v[i]->rescale(0.07); break;
             case TYPE_UFO: v[i]->rescale(0.08); break;
             case TYPE_SPACECRAFT: v[i]->rescale(0.13);break;
             case TYPE_TELEPORTED: v[i]->rescale(0.1);break;
-    }
-    int tmpin[]={10,260,380,580,780,980,1180}; for(int i=0;i<vnum;i++) v[i]->setintime(tmpin[i]);
-    int tmpout[]={5000,7000,9000,9000,9000,9000,9000}; for(int i=0;i<vnum;i++) v[i]->setouttime(tmpout[i]);
-    int tmplot[]={8,2,21,5,15,11,7}; for(int i=0;i<vnum;i++) v[i]->setassignedslot(tmplot[i]);
+        }*/
+    int *tmpin=new int [vnum];
+    int *tmpout=new int[vnum];
+    settmptime(tmpin,tmpout,vnum);
+    for(int i=0;i<vnum;i++) v[i]->setouttime(tmpout[i]);
+    for(int i=0;i<vnum;i++) v[i]->setintime(tmpin[i]);
+    int *tmplot=new int [vnum];
+    settmplot(tmplot,vnum);
+    for(int i=0;i<vnum;i++) v[i]->setassignedslot(tmplot[i]);
+    delete [] tmpin;delete [] tmplot;delete []tmpout;delete[]tmptype;
     for(int i=0;i<vnum;i++) v[i]->setstatus(LOT_WAITING);
     for(int i=0;i<vnum;i++) v[i]->reset(); // corresponding with rescale
+
 
 /* Set Speed */
     linearstep = 0.01;
