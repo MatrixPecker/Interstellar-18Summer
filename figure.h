@@ -78,8 +78,8 @@ protected:
 
 class Car:public Vehicle{
 public:
-    Car(Point pt1={0,-.25}, double width=1,
-         double height=1.3, double owidth=.175,double Radii=0.1);
+    Car(Point pt1={0,0}, double width=0.15,
+        double height=0.11, double owidth=0.02,double Radii=0.02);
     ~Car();
     void reset();
     void draw();
@@ -94,7 +94,7 @@ private:
 };
 class Teleported:public Vehicle{
 public:
-    Teleported(Point pt1={0,0},double width=1,double height=0.5);
+    Teleported(Point pt1={0,0},double width=0.15,double height=0.11);
     ~Teleported();
     void reset();
     void draw();
@@ -109,7 +109,7 @@ private:
 };
 class UFO:public Vehicle{
 public:
-    UFO(Point pt1={0,0},double width=1,double height=0.5,double owidth=0.5);
+    UFO(Point pt1={0,0},double width=0.12,double height=0.09,double owidth=0.015);
     ~UFO();
     void reset();
     void draw();
@@ -126,7 +126,7 @@ private:
 
 class Spacecraft:public Vehicle{
 public:
-    Spacecraft(Point pt1={0,0},double width=1,double height=0.5,double owidth=0.5);
+    Spacecraft(Point pt1={0,0},double width=0.15,double height=0.11,double owidth=0.02);
     ~Spacecraft();
     void reset();
     void draw();
