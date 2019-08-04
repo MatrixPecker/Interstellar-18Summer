@@ -20,6 +20,7 @@ typedef struct _Cdata{
     double CENTRAL_LEFT_X;
     double CENTRAL_RIGHT_X;
     double backwardslng[23];
+    double barwaiting;
 
     Point LNG_IN_0; // before the bar
     Point LNG_IN_1;
@@ -34,8 +35,8 @@ typedef struct _Cdata{
     Point LNG_IN_A6;
     Point LNG_IN_7;
 
-    double SLNG_SEC2[5];//={0.3,0.5,0.7,0.9,1.1};
-    Point SLNG_SEC2A[5];//={{-0.7,-0.1},{-0.7,0.1},{-0.7,0.3},{-0.7,0.5},{-0.7,0.7}};
+    double SLNG_SEC2[5];
+    Point SLNG_SEC2A[5];
     double SLNG_SEC3[5];
     Point SLNG_SEC3A[5];
     double SLNG_SEC4[3];
@@ -46,23 +47,23 @@ typedef struct _Cdata{
     Point SLNG_SEC6A[5];
 
     // If time permitted, come back and optimize that.
-    int D_IN_SEC2[6];
-    int D_IN_SEC3[7];
-    int D_IN_SEC4[9];
-    int D_IN_SEC5[11];
-    int D_IN_SEC6[12];
+    int D_IN_SEC2[7];
+    int D_IN_SEC3[8];
+    int D_IN_SEC4[10];
+    int D_IN_SEC5[12];
+    int D_IN_SEC6[13];
 
-    int D_OUT_SEC2[11];
-    int D_OUT_SEC3[10];
-    int D_OUT_SEC4[8];
-    int D_OUT_SEC5[6];
-    int D_OUT_SEC6[5];
+    int D_OUT_SEC2[12];
+    int D_OUT_SEC3[11];
+    int D_OUT_SEC4[9];
+    int D_OUT_SEC5[7];
+    int D_OUT_SEC6[6];
 
 }Cdata;
 
-typedef struct _Vdata{
-    // add sth.
-}Vdata;
+//typedef struct _Vdata{
+//    // add sth.
+//}Vdata;
 class Canvas {
 private:
     Parkinglot park;

@@ -74,6 +74,8 @@ int Vehicle::getassignedslot() {return assignedslot;}
 void Vehicle::setassignedslot(int slot) {assignedslot=slot;}
 int Vehicle::getstatus() {return status;}
 void Vehicle::setstatus(int s) {status=s;}
+void Vehicle::settype(int t){vtype=t;}
+int Vehicle::gettype(){return vtype;}
 Point Vehicle::getcenter() {return p;}
 Vehicle::Vehicle(){
     status = LOT_WAITING;
@@ -82,8 +84,9 @@ Vehicle::~Vehicle(){}
 
 Car::Car(Point pt1, double width,
          double height, double owidth,double Radii) {
+    srand(time(nullptr));
     float r, g, b; Point p1, p2, p3,p4;
-    p=pt1; w=width; h=height; o=owidth; R=Radii; //srand(time(0));
+    p=pt1; w=width; h=height; o=owidth; R=Radii;
     p1={p.x - w/2,p.y-h/3}; p2={p.x+w/2,p.y+h/3};
     paint(&r,&g,&b);
     float static r1=r,g1=g,b1=b;
@@ -119,6 +122,7 @@ void Car::supermove(double dx, double dy){
 }
 void Car::rotate(Point center, double degree){
     /*move*/
+    rotateVec(&p,center,degree);
     for(int i=0;i<4;i++) sh[i]->rotate(center,degree);
     /*rot backwards*/
 //    Crotate(degree);
@@ -170,7 +174,7 @@ void Teleported::supermove(double dx, double dy){
     sh->supermove(dx,dy);
 }
 void Teleported::draw() {Crotate(inrot);sh->draw();}
-void Teleported::rotate(Point center, double degree){sh->rotate(center,degree);}
+void Teleported::rotate(Point center, double degree){sh->rotate(center,degree);rotateVec(&p,center,degree);}
 void Teleported::Crotate(double degree){sh->rotate(p,degree);}
 
 void Teleported::printin(Point position,int time){
@@ -312,7 +316,7 @@ void Spacecraft::supermove(double dx, double dy){
     p.x+=dx; p.y+=dy;
     for(int i=0;i<8;i++) sh[i]->supermove(dx,dy);
 }
-void Spacecraft::rotate(Point center, double degree){for(int i=0;i<8;i++) sh[i]->rotate(center,degree);}
+void Spacecraft::rotate(Point center, double degree){for(int i=0;i<8;i++) sh[i]->rotate(center,degree);rotateVec(&p,center,degree);}
 void Spacecraft::Crotate(double degree){for(int i=0;i<8;i++) sh[i]->rotate(p,degree);}
 void Spacecraft::draw() {Crotate(inrot);for(int i=0;i<8;i++) sh[i]->draw();}
 

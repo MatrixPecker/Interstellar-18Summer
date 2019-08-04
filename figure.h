@@ -20,6 +20,10 @@
 #define LOT_IN 0
 #define LOT_INWAITING 1
 #define LOT_OUT 2
+#define TYPE_CAR 10
+#define TYPE_UFO 11
+#define TYPE_SPACECRAFT 12
+#define TYPE_TELEPORTED 13
 
 class Vehicle{
 public:
@@ -52,6 +56,8 @@ public:
     void setassignedslot(int slot);
     int getstatus();
     void setstatus(int s);
+    void settype(int t);
+    int gettype();
 /*Others*/
     Vehicle();
     virtual ~Vehicle();
@@ -64,6 +70,7 @@ protected:
     int intime,outtime;
     int assignedslot;
     int status;
+    int vtype;
     void zoomout(double *width,double *height,double *owidth,double *Radii);
     void zoomin(double *width,double *height,double *owidth,double *Radii);
     void paint(float *r, float *g, float *b);
