@@ -12,60 +12,118 @@ Canvas::Canvas() {
     for(int i=0;i<23;i++) c->backwardslng[i] = 0.06;
     c->CENTER = {0,0};
     c->CENTRAL_LOWER_Y = -0.1;
-    c->CENTRAL_UPPER_Y = 0.1; //
+    c->CENTRAL_UPPER_Y = 0.1;
     c->CENTRAL_LEFT_X  = -0.92;
-    c->CENTRAL_RIGHT_X = 0.75; //
-    c->INITCENTER = {c->CENTRAL_LEFT_X,-0.7}; // -0.7 for debug, smaller later
+    c->CENTRAL_RIGHT_X = 0.75;
+    c->INITCENTER = {c->CENTRAL_LEFT_X,-1.3}; // IN
 
-    c->LNG_IN_0  = {c->CENTRAL_LEFT_X,-0.5};
+    c->LNG_IN_0  = {c->CENTRAL_LEFT_X,-0.5}; // BAR
     c->LNG_IN_1  = {c->CENTRAL_LEFT_X,-0.16};
     c->LNG_IN_A1 = {-0.86,(c->CENTRAL_LOWER_Y-0.06)};
     c->LNG_IN_2  = {0.0,c->CENTRAL_LOWER_Y};
     c->LNG_IN_3  = {c->CENTRAL_RIGHT_X-0.08,c->CENTRAL_LOWER_Y};
     c->LNG_IN_A3 = {c->CENTRAL_RIGHT_X-0.08,c->CENTRAL_LOWER_Y+0.08};
-//    c->LNG_IN_4;
-//    c->LNG_IN_A4;
-//    c->LNG_IN_5;
-//    c->LNG_IN_6;
-//    c->LNG_IN_A6;
-//    c->LNG_IN_7;
-//    double tmp = c->CENTRAL_LOWER_Y+0.22;
-    Point p1[]={{-0.68,-0.1},{-0.56,-0.1},{-0.44,-0.1},{-0.32,-0.1},{-0.20,-0.1}}; // assigned here
+    c->LNG_IN_4  = {c->CENTRAL_RIGHT_X,c->CENTRAL_UPPER_Y-0.08};
+    c->LNG_IN_A4 = {c->CENTRAL_RIGHT_X-0.08,c->CENTRAL_UPPER_Y-0.08};
+    c->LNG_IN_5  = {0.0,c->CENTRAL_UPPER_Y};
+    c->LNG_IN_6  = {-0.86,c->CENTRAL_UPPER_Y};
+    c->LNG_IN_A6 = {-0.86,c->CENTRAL_UPPER_Y+0.06};
+    c->LNG_IN_7  = {c->CENTRAL_LEFT_X,1.5}; // OUT
+
+    Point p1[]={{-0.68,-0.1},{-0.56,-0.1},{-0.44,-0.1},{-0.32,-0.1},{-0.20,-0.1}}; // gap 0.12
     for(int i=0;i<5;i++) c->SLNG_SEC2[i]=p1[i].x-c->LNG_IN_A1.x;
     Point pa1[]={{-0.68,-0.22},{-0.56,-0.22},{-0.44,-0.22},{-0.32,-0.22},{-0.20,-0.22}}; // assigned here
     for(int i=0;i<5;i++) c->SLNG_SEC2A[i]=pa1[i];
 
-/* Set Vehicles */
-    vnum = 2;
-    v[0] = new Car(c->INITCENTER,1.0,1.3,0.175,0.1);
-    v[1] = new UFO(c->INITCENTER,1.0,0.5,0.5);
-    v[0]->setpos(c->INITCENTER); v[0]->rescale(0.07);
-    v[1]->setpos(c->INITCENTER); v[1]->rescale(0.08);
-    v[0]->setintime(10); v[1]->setintime(260);
-    v[0]->setouttime(1610); v[1]->setouttime(2000);
-    v[0]->setassignedslot(3); v[1]->setassignedslot(4);
-    for(int i=0;i<vnum;i++) v[i]->setstatus(LOT_WAITING);
+    Point p2[]={{0.24,-0.1},{0.36,-0.1},{0.48,-0.1},{0.6,-0.1},{0.72,-0.1}};
+    for(int i=0;i<5;i++) c->SLNG_SEC3[i]=p2[i].x-c->LNG_IN_2.x;
+    Point pa2[]={{0.26,-0.22},{0.38,-0.22},{0.5,-0.22},{0.62,-0.22},{0.74,-0.22}};
+    for(int i=0;i<5;i++) c->SLNG_SEC3A[i]=pa2[i];
 
-    for(int i=0;i<vnum;i++) v[i]->reset();
+    Point p3[]={{0.75,-0.04},{0.75,0.08},{0.75,0.2}};
+    for(int i=0;i<3;i++) c->SLNG_SEC4[i]=p3[i].y-c->LNG_IN_A3.y; // the first value is negative
+    Point pa3[]={{0.82,-0.04},{0.82,0.08},{0.82,0.2}};
+    for(int i=0;i<3;i++) c->SLNG_SEC4A[i]=pa3[i];
+
+    Point p4[]={{0.5,0.1},{0.38,0.1},{0.26,0.1},{0.14,0.1},{0.02,0.1}};
+    for(int i=0;i<5;i++) c->SLNG_SEC5[i]=p4[i].x-c->LNG_IN_A4.x;
+    Point pa4[]={{0.5,0.22},{0.38,0.22},{0.26,0.22},{0.14,0.22},{0.02,0.22}};
+    for(int i=0;i<5;i++) c->SLNG_SEC5A[i]=pa4[i];
+
+    Point p5[]={{-0.44,0.1},{-0.56,0.1},{-0.68,0.1},{-0.8,0.1},{-0.92,0.1}};
+    for(int i=0;i<5;i++) c->SLNG_SEC6[i]=p5[i].x-c->LNG_IN_5.x;
+    Point pa5[]={{-0.44,0.22},{-0.56,0.22},{-0.68,0.22},{-0.8,0.22},{-0.92,0.22}};
+    for(int i=0;i<5;i++) c->SLNG_SEC6A[i]=pa5[i];
+
+/* Set Vehicles */
+    vnum = 7;
+    int tmptype[]={TYPE_CAR,TYPE_UFO,TYPE_SPACECRAFT,TYPE_CAR,TYPE_CAR,TYPE_CAR,TYPE_CAR};
+    for(int i=0;i<vnum;i++) switch(tmptype[i]){
+        case TYPE_CAR: v[i] = new Car; v[i]->settype(TYPE_CAR); break;
+        case TYPE_UFO: v[i] = new UFO; v[i]->settype(TYPE_UFO); break;
+        case TYPE_SPACECRAFT: v[i] = new Spacecraft; v[i]->settype(TYPE_SPACECRAFT); break;
+        case TYPE_TELEPORTED: v[i] = new Teleported; v[i]->settype(TYPE_TELEPORTED); break;
+        // Teleported Init.: special judge needed
+    }
+    for(int i=0;i<vnum;i++) v[i]->setpos(c->INITCENTER);
+    for(int i=0;i<vnum;i++) switch(v[i]->gettype()){
+            case TYPE_CAR: v[i]->rescale(0.07); break;
+            case TYPE_UFO: v[i]->rescale(0.08); break;
+            case TYPE_SPACECRAFT: v[i]->rescale(0.13);break;
+            case TYPE_TELEPORTED: v[i]->rescale(0.1);break;
+    }
+    int tmpin[]={10,260,380,580,780,980,1180}; for(int i=0;i<vnum;i++) v[i]->setintime(tmpin[i]);
+    int tmpout[]={5000,7000,9000,9000,9000,9000,9000}; for(int i=0;i<vnum;i++) v[i]->setouttime(tmpout[i]);
+    int tmplot[]={8,2,21,5,15,11,7}; for(int i=0;i<vnum;i++) v[i]->setassignedslot(tmplot[i]);
+    for(int i=0;i<vnum;i++) v[i]->setstatus(LOT_WAITING);
+    for(int i=0;i<vnum;i++) v[i]->reset(); // corresponding with rescale
+
 /* Set Speed */
     linearstep = 0.01;
     angularstep = 2;
+
 /* Set Time */
-    double tmp1[] = {(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep, (c->LNG_IN_1.y-c->LNG_IN_0.y)/linearstep,
+    c->barwaiting = 50;
+    double tmp1[] = {(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep, c->barwaiting, (c->LNG_IN_1.y-c->LNG_IN_0.y)/linearstep,
                      (90.0)/angularstep, -1,
                      (90.0)/angularstep,c->backwardslng[0]/linearstep}; // pick backwardslng[0] here.
-    for(int i=0;i<6;i++) c->D_IN_SEC2[i]=(int)tmp1[i];
+    for(int i=0;i<7;i++) c->D_IN_SEC2[i]=(int)tmp1[i];
+
+    double tmp2[] = {(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep, c->barwaiting, (c->LNG_IN_1.y-c->LNG_IN_0.y)/linearstep,
+                     (90.0)/angularstep, (c->LNG_IN_2.x-c->LNG_IN_A1.x)/linearstep, -1,
+                     (90.0)/angularstep,c->backwardslng[0]/linearstep};
+    for(int i=0;i<8;i++) c->D_IN_SEC3[i]=(int)tmp2[i];
+
+    double tmp3[] = {(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep, c->barwaiting, (c->LNG_IN_1.y-c->LNG_IN_0.y)/linearstep,
+                     (90.0)/angularstep, (c->LNG_IN_2.x-c->LNG_IN_A1.x)/linearstep,
+                     (c->LNG_IN_3.x-c->LNG_IN_2.x)/linearstep, (90.0)/angularstep, -1,
+                     (90.0)/angularstep, c->backwardslng[0]/linearstep};
+    for(int i=0;i<10;i++) c->D_IN_SEC4[i]=(int)tmp3[i];
+
+    double tmp4[] = {(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep, c->barwaiting, (c->LNG_IN_1.y-c->LNG_IN_0.y)/linearstep,
+                     (90.0)/angularstep, (c->LNG_IN_2.x-c->LNG_IN_A1.x)/linearstep,
+                     (c->LNG_IN_3.x-c->LNG_IN_2.x)/linearstep, (90.0)/angularstep,
+                     (c->LNG_IN_4.y-c->LNG_IN_A3.y)/linearstep, (90.0)/angularstep,
+                     -1, (90.0)/angularstep, c->backwardslng[0]/linearstep};
+    for(int i=0;i<12;i++) c->D_IN_SEC5[i]=(int)tmp4[i];
+
+    double tmp5[] = {(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep, c->barwaiting, (c->LNG_IN_1.y-c->LNG_IN_0.y)/linearstep,
+                     (90.0)/angularstep, (c->LNG_IN_2.x-c->LNG_IN_A1.x)/linearstep,
+                     (c->LNG_IN_3.x-c->LNG_IN_2.x)/linearstep, (90.0)/angularstep,
+                     (c->LNG_IN_4.y-c->LNG_IN_A3.y)/linearstep, (90.0)/angularstep,
+                     (c->LNG_IN_A4.x-c->LNG_IN_5.x)/linearstep, -1, (90.0)/angularstep, c->backwardslng[0]/linearstep};
+    for(int i=0;i<13;i++) c->D_IN_SEC6[i]=(int)tmp5[i];
 }
 Canvas::~Canvas() {
     for(int i=0;i<vnum;i++) delete v[i];
     delete c;
 }
 void Canvas::draw() {
-    park.parkdraw();//v[0]->rescale(0.07);v[1]->rescale(0.1);
+    park.parkdraw();
     for(int i=0;i<vnum;i++) v[i]->draw();
 }
 void Canvas::change(){
-    if(timenow <= 25) ((UFO*)v[1])->debugg();
+//    if(timenow <= 25) ((UFO*)v[1])->debugg();
     for(int i=0;i<vnum;i++){
         if(timenow >= v[i]->getintime() && timenow < v[i]->getouttime()){
             parkIN(i);
@@ -80,31 +138,83 @@ void Canvas::parkIN(int k) {
     const int SLOT[] = {1,2,3,4,5,1,2,3,4,5,1,2,3,1,2,3,4,5,1,2,3,4,5};
     int sector = SECTOR[v[k]->getassignedslot()-1];
     int t = timenow-v[k]->getintime(); // relative time
-    int s = SLOT[v[k]->getassignedslot()-1]; // relative slot
+    int s = SLOT[v[k]->getassignedslot()-1]-1; // relative slot
 
     if(sector==2){
         /* Renew coordinate map */
-        c->D_IN_SEC2[3] = (int)(c->SLNG_SEC2[s]/linearstep);
-        int T[6]; T[0]=c->D_IN_SEC2[0]; for(int i=1;i<6;i++) T[i]=T[i-1]+c->D_IN_SEC2[i];
+        c->D_IN_SEC2[4] = (int)(c->SLNG_SEC2[s]/linearstep);
+        int T[7]; T[0]=c->D_IN_SEC2[0]; for(int i=1;i<7;i++) T[i]=T[i-1]+c->D_IN_SEC2[i];
         if(t<=T[0]) {v[k]->supermove(0,linearstep);}
-        else if(t>T[0]&&t<=T[1]) {v[k]->supermove(0,linearstep);}
-        else if(t>T[1]&&t<=T[2]) {v[k]->rotate(c->LNG_IN_A1,-1.0*angularstep);}
-        else if(t>T[2]&&t<=T[3]) {v[k]->supermove(linearstep,0);}
-        else if(t>T[3]&&t<=T[4]) {v[k]->rotate(c->SLNG_SEC2A[s],angularstep);}
-        else if(t>T[4]&&t<=T[5]) {v[k]->supermove(0,-1.0*linearstep);}
-        else if(t>T[5]) {v[k]->setstatus(LOT_INWAITING);return;}
+        else if(t>T[0]&&t<=T[1]) {/* Right here waiting. */}
+        else if(t>T[1]&&t<=T[2]) {v[k]->supermove(0,linearstep);}
+        else if(t>T[2]&&t<=T[3]) {v[k]->rotate(c->LNG_IN_A1,-1.0*angularstep);}
+        else if(t>T[3]&&t<=T[4]) {v[k]->supermove(linearstep,0);}
+        else if(t>T[4]&&t<=T[5]) {v[k]->rotate(c->SLNG_SEC2A[s],angularstep);}
+        else if(t>T[5]&&t<=T[6]) {v[k]->supermove(0,-1.0*linearstep);}
+        else if(t>T[6]) {v[k]->setstatus(LOT_INWAITING);return;}
     }
     else if(sector==3){
-
+        c->D_IN_SEC3[5] = (int)(c->SLNG_SEC3[s]/linearstep);
+        int T[8]; T[0]=c->D_IN_SEC3[0]; for(int i=1;i<8;i++) T[i]=T[i-1]+c->D_IN_SEC3[i];
+        if(t<=T[0]) {v[k]->supermove(0,linearstep);}
+        else if(t>T[0]&&t<=T[1]) {/* Right here waiting. */}
+        else if(t>T[1]&&t<=T[2]) {v[k]->supermove(0,linearstep);}
+        else if(t>T[2]&&t<=T[3]) {v[k]->rotate(c->LNG_IN_A1,-1.0*angularstep);}
+        else if(t>T[3]&&t<=T[4]) {v[k]->supermove(linearstep,0);}
+        else if(t>T[4]&&t<=T[5]) {v[k]->supermove(linearstep,0);}
+        else if(t>T[5]&&t<=T[6]) {v[k]->rotate(c->SLNG_SEC3A[s],angularstep);}
+        else if(t>T[6]&&t<=T[7]) {v[k]->supermove(0,-1.0*linearstep);}
+        else if(t>T[7]) {v[k]->setstatus(LOT_INWAITING);return;}
     }
     else if(sector==4){
-
+        c->D_IN_SEC4[7] = (int)(abs(c->SLNG_SEC4[s]/linearstep));
+        int T[10]; T[0]=c->D_IN_SEC4[0]; for(int i=1;i<10;i++) T[i]=T[i-1]+c->D_IN_SEC4[i];
+        if(t<=T[0]) {v[k]->supermove(0,linearstep);}
+        else if(t>T[0]&&t<=T[1]) {/* Right here waiting. */}
+        else if(t>T[1]&&t<=T[2]) {v[k]->supermove(0,linearstep);}
+        else if(t>T[2]&&t<=T[3]) {v[k]->rotate(c->LNG_IN_A1,-1.0*angularstep);}
+        else if(t>T[3]&&t<=T[4]) {v[k]->supermove(linearstep,0);}
+        else if(t>T[4]&&t<=T[5]) {v[k]->supermove(linearstep,0);}
+        else if(t>T[5]&&t<=T[6]) {v[k]->rotate(c->LNG_IN_A3,angularstep);}
+        else if(t>T[6]&&t<=T[7]) {v[k]->supermove(0,linearstep);}
+        else if(t>T[7]&&t<=T[8]) {v[k]->rotate(c->SLNG_SEC4A[s],angularstep);}
+        else if(t>T[8]&&t<=T[9]) {v[k]->supermove(linearstep,0);}
+        else if(t>T[9]) {v[k]->setstatus(LOT_INWAITING);return;}
     }
     else if(sector==5){
-
+        c->D_IN_SEC5[9] = (int)(abs(c->SLNG_SEC5[s]/linearstep));
+        int T[12]; T[0]=c->D_IN_SEC5[0]; for(int i=1;i<12;i++) T[i]=T[i-1]+c->D_IN_SEC5[i];
+        if(t<=T[0]) {v[k]->supermove(0,linearstep);}
+        else if(t>T[0]&&t<=T[1]) {/* Right here waiting. */}
+        else if(t>T[1]&&t<=T[2]) {v[k]->supermove(0,linearstep);}
+        else if(t>T[2]&&t<=T[3]) {v[k]->rotate(c->LNG_IN_A1,-1.0*angularstep);}
+        else if(t>T[3]&&t<=T[4]) {v[k]->supermove(linearstep,0);}
+        else if(t>T[4]&&t<=T[5]) {v[k]->supermove(linearstep,0);}
+        else if(t>T[5]&&t<=T[6]) {v[k]->rotate(c->LNG_IN_A3,angularstep);}
+        else if(t>T[6]&&t<=T[7]) {v[k]->supermove(0,linearstep);}
+        else if(t>T[7]&&t<=T[8]) {v[k]->rotate(c->LNG_IN_A4,angularstep);}
+        else if(t>T[8]&&t<=T[9]) {v[k]->supermove(-1.0*linearstep,0);}
+        else if(t>T[9]&&t<=T[10]) {v[k]->rotate(c->SLNG_SEC5A[s],angularstep);}
+        else if(t>T[10]&&t<=T[11]) {v[k]->supermove(0,linearstep);}
+        else if(t>T[11]) {v[k]->setstatus(LOT_INWAITING);return;}
     }
     else if(sector==6){
-
+        c->D_IN_SEC6[10] = (int)(abs(c->SLNG_SEC6[s]/linearstep));
+        int T[13]; T[0]=c->D_IN_SEC6[0]; for(int i=1;i<13;i++) T[i]=T[i-1]+c->D_IN_SEC6[i];
+        if(t<=T[0]) {v[k]->supermove(0,linearstep);}
+        else if(t>T[0]&&t<=T[1]) {/* Right here waiting. */}
+        else if(t>T[1]&&t<=T[2]) {v[k]->supermove(0,linearstep);}
+        else if(t>T[2]&&t<=T[3]) {v[k]->rotate(c->LNG_IN_A1,-1.0*angularstep);}
+        else if(t>T[3]&&t<=T[4]) {v[k]->supermove(linearstep,0);}
+        else if(t>T[4]&&t<=T[5]) {v[k]->supermove(linearstep,0);}
+        else if(t>T[5]&&t<=T[6]) {v[k]->rotate(c->LNG_IN_A3,angularstep);}
+        else if(t>T[6]&&t<=T[7]) {v[k]->supermove(0,linearstep);}
+        else if(t>T[7]&&t<=T[8]) {v[k]->rotate(c->LNG_IN_A4,angularstep);}
+        else if(t>T[8]&&t<=T[9]) {v[k]->supermove(-1.0*linearstep,0);}
+        else if(t>T[9]&&t<=T[10]) {v[k]->supermove(-1.0*linearstep,0);}
+        else if(t>T[10]&&t<=T[11]) {v[k]->rotate(c->SLNG_SEC6A[s],angularstep);}
+        else if(t>T[11]&&t<=T[12]) {v[k]->supermove(0,linearstep);}
+        else if(t>T[12]) {v[k]->setstatus(LOT_INWAITING);return;}
     }
 }
 void Canvas::parkOUT(int k){
