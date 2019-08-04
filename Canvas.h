@@ -75,6 +75,9 @@ private:
     double angularstep;
     void parkIN(int k);
     void parkOUT(int k);
+    void settmptype(int* temtype,int num);
+    void settmptime(int* tmpin,int* tmpout,int num);
+    void settmplot(int* tmplot,int num);
 public:
     Canvas();
     void draw();
