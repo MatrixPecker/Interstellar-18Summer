@@ -84,20 +84,20 @@ Vehicle::~Vehicle(){}
 
 Car::Car(Point pt1, double width,
          double height, double owidth,double Radii) {
-    srand(time(nullptr));
+//    srand(time(nullptr));
     float r, g, b; Point p1, p2, p3,p4;
     p=pt1; w=width; h=height; o=owidth; R=Radii;
     p1={p.x - w/2,p.y-h/3}; p2={p.x+w/2,p.y+h/3};
     paint(&r,&g,&b);
-    float static r1=r,g1=g,b1=b;
+    float r1=r,g1=g,b1=b; // ORI: float static r1=r,g1=g,b1=b;
     sh[0]=new class Rectangle(p1,p2,r1,g1,b1);
     p1={p.x+w/2-2*o,p.y+h/3+o}; p2={p.x-w/2+2*o,p.y+h/3+o};p3={p.x-w/2+2*o,p.y+h/3};p4={p.x+w/2,p.y+h/3};
     paint(&r,&g,&b);
-    float static r2=r,g2=g,b2=b;
+    float r2=r,g2=g,b2=b;
     sh[1]=new class Trapezium(p1,p2,p3,p4,r2,g2,b2);
     p1={p.x-2*o,p.y-h/3};
     paint(&r,&g,&b);
-    float static r3=r,g3=g,b3=b;
+    float r3=r,g3=g,b3=b;
     sh[2]=new class Circle(p1,Radii,r3,g3,b3);
     p1={p.x+2*o,p.y-h/3};
     sh[3]=new class Circle(p1,Radii,r3,g3,b3);
@@ -157,7 +157,7 @@ void Car::printout(int time) {
 Teleported::Teleported(Point pt1,double width,double height) {
     float r,g,b;Point p1,p2;
     p=pt1;w=width;h=height;o=-1;R=-1;
-    srand(time(NULL));
+//    srand(time(NULL));
     p1={p.x - w/2,p.y-h/2}; p2={p.x+w/2,p.y+h/2};
     paint(&r,&g,&b);
     sh=new class Rectangle(p1,p2,r,g,b);
@@ -201,15 +201,15 @@ UFO::UFO(Point pt1, double width, double height, double owidth) {
     float r, g, b; Point p1, p2, p3,p4;
     p=pt1; w=width; h=height; o=owidth; R=-1;
     p1={p.x,p.y-h/2};
-    paint(&r,&g,&b);float static r1=r,g1=g,b1=b;
+    paint(&r,&g,&b);float r1=r,g1=g,b1=b;
     sh[0]=new class Semicircle(p1,w/2,r1,g1,b1);
     p1={p.x-w/2+2*o/3,p.y-h/2};p2={p.x-2*o/3,p.y-h/2};p3={p.x-o/3,p.y-h/2-o/2};p4={p.x-w/2+o/3,p.y-h/2-o/2};
-    paint(&r,&g,&b);float static r2=r,g2=g,b2=b;
+    paint(&r,&g,&b);float r2=r,g2=g,b2=b;
     sh[1]=new class Trapezium(p1,p2,p3,p4,r2,g2,b2);
     p1={p.x+w/2-o*2/3,p.y-h/2};p2={p.x+o*2/3,p.y-h/2};p3={p.x+o/3,p.y-h/2-o/2};p4={p.x+w/2-o/3,p.y-h/2-o/2};
     sh[2]=new class Trapezium(p1,p2,p3,p4,r2,g2,b2);
     p1={p.x-w/4,p.y-h/2+w/2-o/4};p2={p.x-w/2,p.y-h/2+w/2+o/2};
-    paint(&r,&g,&b);float static r3=r,g3=g,b3=b;
+    paint(&r,&g,&b);float r3=r,g3=g,b3=b;
     sh[3]=new class Line(p1,p2,r3,g3,b3);
     p1={p.x+w/4,p.y-h/2+w/2-o/4};p2={p.x+w/2,p.y-h/2+w/2+o/2};
     sh[4]=new class Line(p1,p2,r3,g3,b3);
@@ -269,26 +269,26 @@ Spacecraft::Spacecraft(Point pt1, double width, double height, double owidth) {
     float r,g,b;Point p1,p2,p3,p4;
     p=pt1;w=width;h=height;o=owidth;R=-1;
     p1={p.x-w/2+o,p.y-h/4};p2={p.x+w/2-o,p.y+h/4};
-    paint(&r,&g,&b);float static r1=r,g1=g,b1=b;
+    paint(&r,&g,&b);float r1=r,g1=g,b1=b;
     sh[0]=new class Rectangle(p1,p2,r1,g1,b1);
     p1={p.x+w/2-o,p.y+h/4};p2={p.x+w/2-o,p.y-h/4};p3={p.x+w/2,p.y};
-    paint(&r,&g,&b);float static r2=r,g2=g,b2=b;
+    paint(&r,&g,&b);float r2=r,g2=g,b2=b;
     sh[1]=new class Triangle(p1,p2,p3,r2,g2,b2);
     p1={p.x,p.y-h/10};p2={p.x+w/8,p.y+h/10};
-    paint(&r,&g,&b);float static r3=r,g3=g,b3=b;
+    paint(&r,&g,&b);float r3=r,g3=g,b3=b;
     sh[2]=new class Rectangle(p1,p2,r3,g3,b3);
     p1={p.x+w/6,p.y+h/8};p2={p.x+w/5,p.y+h/6};
-    paint(&r,&g,&b);float static r4=r,g4=g,b4=b;
+    paint(&r,&g,&b);float r4=r,g4=g,b4=b;
     sh[3]=new class Rectangle(p1,p2,r4,g4,b4);
     p1={p.x+w/6,p.y-h/8};p2={p.x+w/5,p.y-h/6};
     sh[4]=new class Rectangle(p1,p2,r4,g4,b4);
     p1={p.x,p.y+h/4};p2={p.x-w/2+o,p.y+h/4};p3={p.x-w/2+o,p.y+h/2};
-    paint(&r,&g,&b);float static r5=r,g5=g,b5=b;
+    paint(&r,&g,&b);float r5=r,g5=g,b5=b;
     sh[5]=new class Triangle(p1,p2,p3,r5,g5,b5);
     p1={p.x,p.y-h/4};p2={p.x-w/2+o,p.y-h/4};p3={p.x-w/2+o,p.y-h/2};
     sh[6]=new class Triangle(p1,p2,p3,r5,g5,b5);
     p1={p.x-w/2+o,p.y+h/5};p2={p.x-w/2+o,p.y-h/5};p3={p.x-w/2+o/2,p.y-h/4};p4={p.x-w/2+o/2,p.y+h/4};
-    paint(&r,&g,&b);float static r6=r,g6=g,b6=b;
+    paint(&r,&g,&b);float r6=r,g6=g,b6=b;
     sh[7]=new class Trapezium(p1,p2,p3,p4,r6,g6,b6);
     inrot = 0; // counter-clockwise 0 degree
 }

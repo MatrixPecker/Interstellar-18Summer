@@ -9,6 +9,7 @@
 #include "figure.h"
 #include "Vec.h"
 #include <cmath>
+#include <ctime>
 
 typedef struct _Cdata{
     int slotnum; // 23

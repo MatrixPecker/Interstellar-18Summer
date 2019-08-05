@@ -88,7 +88,7 @@ void keyboard(unsigned char key, int x, int y) // [only for debug]
 }
 
 int main(int argc, char** argv){
-    srand(time(nullptr));
+    srand(time(0));
 
     glutInit(&argc, argv);
     glutInitWindowSize(900, 900);
