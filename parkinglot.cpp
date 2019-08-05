@@ -12,7 +12,8 @@ Parkinglot::Parkinglot() {
     sh[2]=new class Rectangle({0.26f,-0.02f},{0.65f,0.02f},r,g,b);
     sh[3]=new class Line({-0.98f,-0.4f},{-0.98f,0.38f},r,g,b);
     sh[4]=new class Line({0.98f,-0.38f},{0.98f,0.38f},r,g,b);
-    sh[5]=new class Line({-0.96f,-0.4f},{-0.86f,-0.4f},0.9,g,b);
+    sh[5]=new class Line({-0.85f,-0.4f},{-0.86f,-0.4f},0.9,g,b); // IN
+//    sh[5]=new class Line({-0.96f,-0.4f},{-0.86f,-0.4f},0.9,g,b); // IN
     sh[6]=new class Line({-0.86f,-0.38f},{-0.08f,-0.38f},r,g,b);
     sh[7]=new class Line({-0.08f,-0.02f},{0.08f,-0.02f},r,g,b);
     sh[8]=new class Line({0.98f,-0.38f},{0.08f,-0.38f},r,g,b);
@@ -72,7 +73,8 @@ Parkinglot::Parkinglot() {
     sh[62]=new class Line({0.1f,0.18f},{0.1f,0.02f},r,g,b);
     sh[63]=new class Line({-0.1f,-0.18f},{-0.1f,-0.02f},r,g,b);
     sh[64]=new class Line({0.1f,-0.18f},{0.1f,-0.02f},r,g,b);
-    sh[65]=new class Line({-0.96f,0.4f},{-0.86f,0.4f},1,0,0);
+    sh[65]=new class Line({-0.86f,0.4f},{-0.85f,0.4f},1,0,0);
+    //sh[65]=new class Line({-0.96f,0.4f},{-0.86f,0.4f},1,0,0); // OUT
     sh[66]=new class Line({0.82f,0.06f},{0.98f,0.06f},r,g,b);
     sh[67]=new class Line({0.82f,-0.06f},{0.98f,-0.06f},r,g,b);
     for (int i=0;i<=19;i++) plate[i]=true;

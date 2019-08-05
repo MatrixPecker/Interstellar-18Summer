@@ -157,7 +157,6 @@ Canvas::Canvas() {
         if(v[i]->gettype() == TYPE_TELEPORTED){
             v[i]->setpos(c->LOTCENTER[v[i]->getassignedslot()-1]); // assign initcenter here! (teleported)
             v[i]->setstatus(LOT_INWAITING);
-
         }
     }
     for(int i=0;i<vnum;i++) v[i]->reset(); // corresponding with rescale
@@ -201,17 +200,24 @@ Canvas::Canvas() {
                      (c->LNG_IN_4.y-c->LNG_IN_A3.y)/linearstep, (90.0)/angularstep,
                      (c->LNG_IN_A4.x-c->LNG_IN_5.x)/linearstep, -1, (90.0)/angularstep, c->backwardslng[0]/linearstep};
     for(int i=0;i<13;i++) c->D_IN_SEC6[i]=(int)tmp5[i];
+/* Set Bars */
+    is_INBARraised  = false;
+    is_OUTBARraised = false;
+    bar[0] = new Line ({-0.96,-0.4},{-0.86,-0.4},1,0,0); // IN_BAR
+    bar[1] = new Line ({-0.96,0.4},{-0.86,0.4},1,0,0); // OUT_BAR
 }
 Canvas::~Canvas() {
-    for(int i=0;i<vnum;i++) delete v[i]; // delete[] v; // for(int i=0;i<vnum;i++) delete v[i];
+    for(int i=0;i<vnum;i++) delete v[i]; // delete[] v; // for(int i=0;i<vnum;i++) delete v[i]; // Problem here...
+    delete bar[0]; delete bar[1];
     delete c;
 }
 void Canvas::draw() {
     park.parkdraw();
+    bar[0]->draw(); bar[1]->draw();
     for(int i=0;i<vnum;i++) v[i]->draw();
 }
 void Canvas::change(){
-//    if(timenow <= 25) ((UFO*)v[1])->debugg();
+    static int bartime = 0;
     for(int i=0;i<vnum;i++){
         if(timenow >= v[i]->getintime() && timenow < v[i]->getouttime() && v[i]->getstatus()<LOT_INWAITING){
             parkIN(i);
@@ -219,7 +225,14 @@ void Canvas::change(){
         if(timenow >= v[i]->getouttime()){ // the gap interval should be set strictly! additional calculation needed.
             parkOUT(i);
         }
+        if(bartime > 3000) bartime-=1000;
+        if(timenow == v[i]->getintime() && bartime>(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep+300) {bartime=0;}
+
     }
+    if(bartime>80&&bartime<=110) bar[0]->rotate({-0.86,-0.4}, -3);
+    if(bartime>=80+(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep+90 && bartime<80+(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep+120)
+        bar[0]->rotate({-0.86,-0.4}, 3);
+    bartime++;
 }
 void Canvas::parkIN(int k) {
     const int SECTOR[] = {2,2,2,2,2,3,3,3,3,3,4,4,4,5,5,5,5,5,6,6,6,6,6};

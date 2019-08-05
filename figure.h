@@ -118,7 +118,7 @@ public:
     void Crotate(double degree);
     void printin(Point position,int time);
     void printout(int time);
-    void debugg();
+    void debugg(); // only for debug
 private:
     Shape *sh[5];
     int intime,outtime,price;

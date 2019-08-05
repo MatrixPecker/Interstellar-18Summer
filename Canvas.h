@@ -70,11 +70,15 @@ class Canvas {
 private:
     Parkinglot park;
     Vehicle *v[50];
+    Line *bar[2];
     int vnum; // total number of active vehicles
     Cdata *c; // coordinate map
-    int timenow;
     double linearstep;
     double angularstep;
+/* Status */
+    int timenow;
+    bool is_INBARraised; // default: false
+    bool is_OUTBARraised; // default: false
     void parkIN(int k);
     void parkOUT(int k);
     void settmptype(int* temtype,int num);
