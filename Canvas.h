@@ -16,6 +16,7 @@ typedef struct _Cdata{
     bool is_occupied[40];
     Point CENTER;
     Point INITCENTER;
+    Point LOTCENTER[40]; // center of each lot
     double CENTRAL_LOWER_Y;
     double CENTRAL_UPPER_Y;
     double CENTRAL_LEFT_X;

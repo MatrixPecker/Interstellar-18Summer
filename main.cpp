@@ -22,8 +22,8 @@ void timeStep(int step){
     glutTimerFunc(step, timeStep, step);
     glutPostRedisplay();
 }
-// only for demonstration of the rotation of single figures
-//void TestDraw1(){
+
+//void TestDraw1(){ // [demonstration of the rotation of single figures]
 //    static double r = 0; r += 10;
 //
 //    Spacecraft sh1({-0.4,0.4},0.3,0.2,0.2/3.0);

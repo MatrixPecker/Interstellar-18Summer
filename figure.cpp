@@ -221,15 +221,15 @@ void UFO::debugg(){
 }
 void UFO::reset() {
     Point p1,p2,p3,p4;
-    p1={p.x,p.y-h/2};
+    p1={p.x,p.y-h/2+h/2};
     ((class Semicircle*)sh[0])->reset(p1,w/2);
-    p1={p.x-w/2+2*o/3,p.y-h/2};p2={p.x-2*o/3,p.y-h/2};p3={p.x-o/3,p.y-h/2-o/2};p4={p.x-w/2+o/3,p.y-h/2-o/2};
+    p1={p.x-w/2+2*o/3,p.y-h/2+h/2};p2={p.x-2*o/3,p.y-h/2+h/2};p3={p.x-o/3,p.y-h/2-o/2+h/2};p4={p.x-w/2+o/3,p.y-h/2-o/2+h/2};
     ((class Trapezium*)sh[1])->reset(p1,p2,p3,p4);
-    p1={p.x+w/2-o*2/3,p.y-h/2};p2={p.x+o*2/3,p.y-h/2};p3={p.x+o/3,p.y-h/2-o/2};p4={p.x+w/2-o/3,p.y-h/2-o/2};
+    p1={p.x+w/2-o*2/3,p.y-h/2+h/2};p2={p.x+o*2/3,p.y-h/2+h/2};p3={p.x+o/3,p.y-h/2-o/2+h/2};p4={p.x+w/2-o/3,p.y-h/2-o/2+h/2};
     ((class Trapezium*)sh[2])->reset(p1,p2,p3,p4);
-    p1={p.x-w/4,p.y-h/2+w/2-o/8};p2={p.x-w/2,p.y-h/2+w/2+o/4};
+    p1={p.x-w/4,p.y-h/2+w/2-o/8+h/2};p2={p.x-w/2,p.y-h/2+w/2+o/4+h/2};
     ((class Line*)sh[3])->reset(p1,p2);
-    p1={p.x+w/4,p.y-h/2+w/2-o/8};p2={p.x+w/2,p.y-h/2+w/2+o/4};
+    p1={p.x+w/4,p.y-h/2+w/2-o/8+h/2};p2={p.x+w/2,p.y-h/2+w/2+o/4+h/2};
     ((class Line*)sh[4])->reset(p1,p2); // Rectangle
     inrot = 3;
 }
@@ -238,7 +238,7 @@ void UFO::supermove(double dx, double dy){
     for(int i=0;i<5;i++) sh[i]->supermove(dx,dy);
 }
 void UFO::rotate(Point center, double degree){for(int i=0;i<5;i++) sh[i]->rotate(center,degree);rotateVec(&p,center,degree);}
-void UFO::Crotate(double degree){for(int i=0;i<5;i++) sh[i]->rotate({p.x,p.y-h/2},degree);}
+void UFO::Crotate(double degree){for(int i=0;i<5;i++) sh[i]->rotate({p.x,p.y},degree);}
 void UFO::draw() {
     inrot += 3; if(inrot>365)inrot-=360; // self-spinning
     Crotate(3);
@@ -311,6 +311,7 @@ void Spacecraft::reset() {
     ((class Triangle*)sh[6])->reset(p1,p2,p3);
     p1={p.x-w/2+o,p.y+h/5};p2={p.x-w/2+o,p.y-h/5};p3={p.x-w/2+o/2,p.y-h/4};p4={p.x-w/2+o/2,p.y+h/4};
     ((class Trapezium*)sh[7])->reset(p1,p2,p3,p4);
+    Crotate(90);
 }
 void Spacecraft::supermove(double dx, double dy){
     p.x+=dx; p.y+=dy;

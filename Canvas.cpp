@@ -9,16 +9,16 @@ void Canvas::settmptype(int *temtype,int num) {
     temtype[0]=TYPE_TELEPORTED;temtype[1]=TYPE_TELEPORTED;
     temtype[2]=TYPE_SPACECRAFT;temtype[3]=TYPE_SPACECRAFT;
     for (int i = 4; i < num; i++) {
-        ran = rand() % 3;
+        ran = rand() % 4;
         switch (ran) {
             case 0:
-                temtype[i] = TYPE_CAR;
-                break;
+                temtype[i] = TYPE_CAR; break;
             case 1:
-                temtype[i] = TYPE_SPACECRAFT;
-                break;
+                temtype[i] = TYPE_SPACECRAFT; break;
             case 2:
-                temtype[i] = TYPE_UFO;
+                temtype[i] = TYPE_UFO; break;
+            case 3:
+                temtype[i] = TYPE_TELEPORTED; break;
         }
     }
 }
@@ -68,6 +68,12 @@ Canvas::Canvas() {
     c->CENTRAL_RIGHT_X = 0.75;
     c->INITCENTER = {c->CENTRAL_LEFT_X,-1.3}; // IN
 
+    double tmplotcntx[] = {-0.8,-0.68,-0.56,-0.44,-0.32,0.14,0.26,0.38,0.5,0.62,0.9,0.9,0.9,
+                           0.62,0.5,0.38,0.26,0.14,-0.32,-0.44,-0.56,-0.68,-0.8};
+    double tmplotcnty[] = {-0.3,-0.3,-0.3,-0.3,-0.3,-0.3,-0.3,-0.3,-0.3,-0.3,-0.12,0,0.12,
+                           0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3};
+    for(int i=0;i<23;i++) c->LOTCENTER[i] = {tmplotcntx[i],tmplotcnty[i]};
+
     c->LNG_IN_0  = {c->CENTRAL_LEFT_X,-0.5}; // BAR
     c->LNG_IN_1  = {c->CENTRAL_LEFT_X,-0.16};
     c->LNG_IN_A1 = {-0.86,(c->CENTRAL_LOWER_Y-0.06)};
@@ -107,7 +113,7 @@ Canvas::Canvas() {
     for(int i=0;i<5;i++) c->SLNG_SEC6A[i]=pa5[i];
 
 /* Set Vehicles */
-    vnum = 10;
+    vnum = 18;
     int *tmptype=new int[vnum];
     settmptype(tmptype,vnum);
     for(int i=0;i<vnum;i++) {
@@ -143,12 +149,21 @@ Canvas::Canvas() {
     settmptime(tmpin,tmpout,vnum);
     for(int i=0;i<vnum;i++) v[i]->setouttime(tmpout[i]);
     for(int i=0;i<vnum;i++) v[i]->setintime(tmpin[i]);
+    for(int i=0;i<vnum;i++) v[i]->setstatus(LOT_WAITING);
     int *tmplot=new int [vnum];
     settmplot(tmplot,vnum);
-    for(int i=0;i<vnum;i++) v[i]->setassignedslot(tmplot[i]);
-    delete [] tmpin;delete [] tmplot;delete []tmpout;delete[]tmptype;
-    for(int i=0;i<vnum;i++) v[i]->setstatus(LOT_WAITING);
+    for(int i=0;i<vnum;i++){
+        v[i]->setassignedslot(tmplot[i]);
+        if(v[i]->gettype() == TYPE_TELEPORTED){
+            v[i]->setpos(c->LOTCENTER[v[i]->getassignedslot()-1]); // assign initcenter here! (teleported)
+            v[i]->setstatus(LOT_INWAITING);
+
+        }
+    }
     for(int i=0;i<vnum;i++) v[i]->reset(); // corresponding with rescale
+    for(int i=0;i<vnum;i++)
+        if((v[i]->getassignedslot()<=10 || v[i]->getassignedslot()>=14) && v[i]->gettype() == TYPE_TELEPORTED) v[i]->Crotate(90);
+    delete [] tmpin; delete [] tmplot; delete [] tmpout; delete [] tmptype;
 
 
 /* Set Speed */
@@ -188,7 +203,7 @@ Canvas::Canvas() {
     for(int i=0;i<13;i++) c->D_IN_SEC6[i]=(int)tmp5[i];
 }
 Canvas::~Canvas() {
-    for(int i=0;i<vnum;i++) delete v[i];
+    for(int i=0;i<vnum;i++) delete v[i]; // delete[] v; // for(int i=0;i<vnum;i++) delete v[i];
     delete c;
 }
 void Canvas::draw() {
@@ -198,7 +213,7 @@ void Canvas::draw() {
 void Canvas::change(){
 //    if(timenow <= 25) ((UFO*)v[1])->debugg();
     for(int i=0;i<vnum;i++){
-        if(timenow >= v[i]->getintime() && timenow < v[i]->getouttime()){
+        if(timenow >= v[i]->getintime() && timenow < v[i]->getouttime() && v[i]->getstatus()<LOT_INWAITING){
             parkIN(i);
         }
         if(timenow >= v[i]->getouttime()){ // the gap interval should be set strictly! additional calculation needed.
