@@ -173,7 +173,9 @@ void Teleported::supermove(double dx, double dy){
     p.x+=dx; p.y+=dy;
     sh->supermove(dx,dy);
 }
-void Teleported::draw() {Crotate(inrot);sh->draw();}
+void Teleported::draw() {
+    magictime++;if (magictime%20==0) magic();
+    Crotate(inrot);sh->draw();}
 void Teleported::rotate(Point center, double degree){sh->rotate(center,degree);rotateVec(&p,center,degree);}
 void Teleported::Crotate(double degree){sh->rotate(p,degree);}
 
@@ -196,7 +198,27 @@ void Teleported::printout(int time) {
 //    cout << "* Type of vehicle: Teleported" << endl;
 //    cout << "******************************************" << endl;
 }
-    
+
+void Teleported::magic() {
+    int ran=rand()%3;
+    delete sh;
+    float r,g,b;paint(&r,&g,&b);
+    switch (ran){
+        case 0:Point p1,p2,p3;
+            p1={p.x,p.y+h/2};p2={p.x-h/2,p.y-h/2};p3={p.x+h/2,p.y-h/2};
+            sh=new class Triangle(p1,p2,p3,r,g,b);
+            break;
+        case 1:
+            Point p4,p5;
+            p4={p.x-h/2,p.y-h/2};p5={p.x+h/2,p.y+h/2};
+            sh=new class Rectangle(p4,p5,r,g,b);break;
+        case 2:
+            Point p6,p7,p8,p9,p10;
+            p6={p.x-h/4,p.y+h/2};p7={p.x+h/4,p.y+h/2};p8={p.x+h/2,p.y};p9={p.x,p.y-h/2};p10={p.x-h/2,p.y};
+            sh=new class Pentagon(p6,p7,p8,p9,p10,r,g,b);break;
+    }
+}
+
 UFO::UFO(Point pt1, double width, double height, double owidth) {
     float r, g, b; Point p1, p2, p3,p4;
     p=pt1; w=width; h=height; o=owidth; R=-1;

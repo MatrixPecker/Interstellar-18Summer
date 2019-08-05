@@ -159,3 +159,29 @@ void Trapezium::draw() {
     glVertex2f(p1.x, p1.y); glVertex2f(p2.x, p2.y); glVertex2f(p3.x, p3.y);glVertex2f(p4.x,p4.y);
     glEnd();
 }
+
+Pentagon::Pentagon(Point pt1, Point pt2, Point pt3, Point pt4, Point pt5, float red, float green, float blue) {
+    p1=pt1;p2=pt2;p3=pt3;p4=pt4;p5=pt5;r=red;g=green;b=blue;
+}
+void Pentagon::reset(Point pt1, Point pt2, Point pt3, Point pt4,Point pt5){
+    p1=pt1;p2=pt2;p3=pt3;p4=pt4;p5=pt5;
+}
+void Pentagon::supermove(double dx, double dy){
+    moveVec(&p1,{dx,dy});
+    moveVec(&p2,{dx,dy});
+    moveVec(&p3,{dx,dy});
+    moveVec(&p4,{dx,dy});
+    moveVec(&p5,{dx,dy});
+}
+void Pentagon::rotate(Point center, double degree){
+    rotateVec(&p1, center, degree);
+    rotateVec(&p2, center, degree);
+    rotateVec(&p3, center, degree);
+    rotateVec(&p4, center, degree);
+    rotateVec(&p5,center,degree);
+}
+void Pentagon::draw() {
+    glColor3f(r, g, b); glBegin(GL_POLYGON);
+    glVertex2f(p1.x, p1.y); glVertex2f(p2.x, p2.y); glVertex2f(p3.x, p3.y);glVertex2f(p4.x,p4.y);glVertex2f(p5.x,p5.y);
+    glEnd();
+}

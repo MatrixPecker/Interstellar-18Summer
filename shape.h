@@ -102,5 +102,15 @@ public:
 private:
     Point p1,p2,p3,p4;
 };
-
+class Pentagon:public Shape{
+public:
+    Pentagon(Point pt1={-0.25,0.5},Point pt2={0.25,0.5},
+             Point pt3={0.5,-0.5},Point pt4={-0.5,-0.5}, Point pt5={0,-0.75},float r=0, float g=0, float b=0);
+    void reset(Point pt1, Point pt2, Point pt3, Point pt4,Point pt5);
+    void draw();
+    void supermove(double dx, double dy);
+    void rotate(Point center, double degree);
+private:
+    Point p1,p2,p3,p4,p5;
+};
 #endif //HWX_SHAPE_H

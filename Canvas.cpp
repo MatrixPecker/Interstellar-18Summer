@@ -226,7 +226,7 @@ void Canvas::change(){
             parkOUT(i);
         }
         if(bartime > 3000) bartime-=1000;
-        if(timenow == v[i]->getintime() && bartime>(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep+300) {bartime=0;}
+        if(timenow == v[i]->getintime() && bartime>(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep+200) {bartime=0;}
 
     }
     if(bartime>80&&bartime<=110) bar[0]->rotate({-0.86,-0.4}, -3);

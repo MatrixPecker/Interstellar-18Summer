@@ -103,8 +103,10 @@ public:
     void printout(int time);
     void rotate(Point center, double degree);
     void Crotate(double degree);
+    void magic();
 private:
     Shape *sh;
+    int magictime;
     int intime,outtime,price;
 };
 class UFO:public Vehicle{
