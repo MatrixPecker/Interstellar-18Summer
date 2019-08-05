@@ -87,7 +87,7 @@ Car::Car(Point pt1, double width,
 //    srand(time(nullptr));
     float r, g, b; Point p1, p2, p3,p4;
     p=pt1; w=width; h=height; o=owidth; R=Radii;
-    p1={p.x - w/2,p.y-h/3}; p2={p.x+w/2,p.y+h/3};
+    p1={p.x-w/2,p.y-h/3}; p2={p.x+w/2,p.y+h/3};
     paint(&r,&g,&b);
     float r1=r,g1=g,b1=b; // ORI: float static r1=r,g1=g,b1=b;
     sh[0]=new class Rectangle(p1,p2,r1,g1,b1);
@@ -101,9 +101,12 @@ Car::Car(Point pt1, double width,
     sh[2]=new class Circle(p1,Radii,r3,g3,b3);
     p1={p.x+2*o,p.y-h/3};
     sh[3]=new class Circle(p1,Radii,r3,g3,b3);
-    inrot = 90;Crotate(inrot); // counter-clockwise 90 degrees
+    sh[4]=new class Line({p.x-1*w/3,p.y-h/3+flaglng+o},{p.x-1*w/3,p.y-h/3+o+flaglng+o},0,0,0);
+    sh[5]=new class Triangle({p.x-1*w/3,p.y-h/3+o+flaglng+o},{p.x-1*w/3,p.y-h/3+2*o+flaglng+o},{p.x-1*w/3+o,p.y-h/3+1.5*o+flaglng+o},1,0,0);
+    inrot = 90;// counter-clockwise 90 degrees
+    flaglng = 0;
 }
-Car::~Car() {for(int i=0;i<4;i++) delete sh[i];}
+Car::~Car() {for(int i=0;i<6;i++) delete sh[i];}
 void Car::reset(){
     Point p1,p2,p3,p4;
     p1={p.x - w/2,p.y-h/3}; p2={p.x+w/2,p.y+h/3};
@@ -114,23 +117,32 @@ void Car::reset(){
     ((Circle*)sh[2])->reset(p1,R);
     p1={p.x+2*o,p.y-h/3};
     ((Circle*)sh[3])->reset(p1,R);
-    inrot = 90;Crotate(inrot);
+    ((Line*)sh[4])->reset({p.x-1*w/3,p.y-h/3+flaglng+o},{p.x-1*w/3,p.y-h/3+o+flaglng+o});
+    ((Triangle*)sh[5])->reset({p.x-1*w/3,p.y-h/3+o+flaglng+o},{p.x-1*w/3,p.y-h/3+2*o+flaglng+o},{p.x-1*w/3+o,p.y-h/3+1.5*o+flaglng+o});
+    Crotate(inrot);inrot/=2;
+}
+void Car::magicflag(){
+    static int rescalestatus = 0;
+    if(rescalestatus%400 < 200) flaglng+=0.001;
+    else flaglng-=0.001;
+    rescalestatus++;rescalestatus=rescalestatus%400;
 }
 void Car::supermove(double dx, double dy){
     p.x+=dx; p.y+=dy;
-    for(int i=0;i<4;i++) sh[i]->supermove(dx,dy);
+    for(int i=0;i<6;i++) sh[i]->supermove(dx,dy);
 }
 void Car::rotate(Point center, double degree){
     /*move*/
     rotateVec(&p,center,degree);
-    for(int i=0;i<4;i++) sh[i]->rotate(center,degree);
+    for(int i=0;i<6;i++) sh[i]->rotate(center,degree);
+    inrot+=degree;
     /*rot backwards*/
 //    Crotate(degree);
     /*addup inrot*/
 //    inrot += degree;
 }
-void Car::Crotate(double degree){for(int i=0;i<4;i++) sh[i]->rotate(p,degree);}
-void Car::draw() {for(int i=0;i<4;i++) sh[i]->draw();}
+void Car::Crotate(double degree){for(int i=0;i<6;i++) sh[i]->rotate(p,degree);inrot+=degree;}
+void Car::draw() {magicflag(); reset(); for(int i=0;i<6;i++) sh[i]->draw();}
 
 void Car::printin(Point position,int time){
     // Something goes wrong. Come back and revise that later. -- wqh

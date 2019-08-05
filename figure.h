@@ -83,14 +83,16 @@ public:
     ~Car();
     void reset();
     void draw();
+    void magicflag();
     void supermove(double dx, double dy);
     void rotate(Point center, double degree);
     void Crotate(double degree); // rotate around the center of this vehicle.
     void printin(Point position,int time);
     void printout(int time);
 private:
-    Shape *sh[4];
+    Shape *sh[6];
     int intime,outtime,price; // repeated definition here. fix that later.
+    double flaglng;
 };
 class Teleported:public Vehicle{
 public:

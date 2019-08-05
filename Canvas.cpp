@@ -7,8 +7,8 @@ void Canvas::settmptype(int *temtype,int num) {
     srand(time(NULL));
     int ran = 0;
     temtype[0]=TYPE_TELEPORTED;temtype[1]=TYPE_TELEPORTED;
-    temtype[2]=TYPE_SPACECRAFT;temtype[3]=TYPE_SPACECRAFT;
-    for (int i = 4; i < num; i++) {
+    temtype[2]=TYPE_SPACECRAFT;temtype[3]=TYPE_CAR;temtype[4]=TYPE_UFO;
+    for (int i = 5; i < num; i++) {
         ran = rand() % 4;
         switch (ran) {
             case 0:
