@@ -131,6 +131,7 @@ public:
     Spacecraft(Point pt1={0,0},double width=0.15,double height=0.11,double owidth=0.02);
     ~Spacecraft();
     void reset();
+    void autorescale();
     void draw();
     void supermove(double dx, double dy);
     void rotate(Point center, double degree);

@@ -312,7 +312,7 @@ Spacecraft::Spacecraft(Point pt1, double width, double height, double owidth) {
     p1={p.x-w/2+o,p.y+h/5};p2={p.x-w/2+o,p.y-h/5};p3={p.x-w/2+o/2,p.y-h/4};p4={p.x-w/2+o/2,p.y+h/4};
     paint(&r,&g,&b);float r6=r,g6=g,b6=b;
     sh[7]=new class Trapezium(p1,p2,p3,p4,r6,g6,b6);
-    inrot = 0; // counter-clockwise 0 degree
+    inrot = 90; // counter-clockwise 0 degree
 }
 Spacecraft::~Spacecraft() {for(int i=0;i<=7;i++) delete sh[i];}
 void Spacecraft::reset() {
@@ -333,16 +333,21 @@ void Spacecraft::reset() {
     ((class Triangle*)sh[6])->reset(p1,p2,p3);
     p1={p.x-w/2+o,p.y+h/5};p2={p.x-w/2+o,p.y-h/5};p3={p.x-w/2+o/2,p.y-h/4};p4={p.x-w/2+o/2,p.y+h/4};
     ((class Trapezium*)sh[7])->reset(p1,p2,p3,p4);
-    Crotate(90);
+    Crotate(inrot);inrot/=2;
 }
 void Spacecraft::supermove(double dx, double dy){
     p.x+=dx; p.y+=dy;
     for(int i=0;i<8;i++) sh[i]->supermove(dx,dy);
 }
-void Spacecraft::rotate(Point center, double degree){for(int i=0;i<8;i++) sh[i]->rotate(center,degree);rotateVec(&p,center,degree);}
-void Spacecraft::Crotate(double degree){for(int i=0;i<8;i++) sh[i]->rotate(p,degree);}
-void Spacecraft::draw() {Crotate(inrot);for(int i=0;i<8;i++) sh[i]->draw();}
-
+void Spacecraft::rotate(Point center, double degree){for(int i=0;i<8;i++) sh[i]->rotate(center,degree);rotateVec(&p,center,degree);inrot+=degree;}
+void Spacecraft::Crotate(double degree){for(int i=0;i<8;i++) sh[i]->rotate(p,degree);inrot+=degree;}
+void Spacecraft::draw() {autorescale(); reset(); for(int i=0;i<8;i++) sh[i]->draw();}
+void Spacecraft::autorescale() {
+    static int rescalestatus = 0;
+    if(rescalestatus%200 < 100) rescale(0.97);
+    else rescale (1.030928); // parameter assigned
+    rescalestatus++;rescalestatus=rescalestatus%200;
+}
 void Spacecraft::printin(Point position,int time){
 //    Spacecraft::intime=time;
 //    cout<<"*************Arrival ticket*************"<<endl;
