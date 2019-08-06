@@ -11,11 +11,7 @@ Wang Ziyi  518370910073
   
 Wu Qinhang 518370910041
 
-**Version: Milestone 1 (July. 28)**
-
-**DDL(Milestone 2): Aug. 2**
-
-**DDL(Final Submission): Aug. 7**
+**Version: Final Submission (Aug. 6)**
 
 ## File Structure
 |--main.cpp
@@ -23,10 +19,6 @@ Wu Qinhang 518370910041
 |--Vec.h
 
 |--Vec.cpp
-
-|--Engine.h
-
-|--Engine.cpp
 
 |--shape.h
 
@@ -40,11 +32,25 @@ Wu Qinhang 518370910041
 
 |--parkinglot.h
 
+|--Canvas.cpp
+
+|--Canvas.h
+
 |--README.md
 
-|--Changelog.txt  [Not Implemented]
+|--Changelog.txt
   
 |--CMakeLists.txt
+
+|--p3_part1.cpp
+
+|--parkingarea.h
+
+|--parkingarea.cpp
+
+|--normalvehicle.h
+
+|--normalvehicle.cpp
 
 
 ## To-do List
@@ -53,23 +59,23 @@ Wu Qinhang 518370910041
 - ~~Engine: Vec, Rotate    [WQH]~~
 - First Part of the Parkinglot (the design of a generic parking lot)    [GXH/LYK]
 - ~~Figure: Parkinglot    [LYK]~~
-  - Layer design & fix    [LYK]
-- Size & Scale fix    [?]
-- Shape: barrier blocking    [?]
-- Shape: bicycle, motorbike, car    [?]
+  - ~~Layer design & fix    [LYK]
+- ~~Size & Scale fix    [?]
+- ~~Shape: barrier blocking    [?]
+- ~~Shape: bicycle, motorbike, car    [?]
 - README maintenance    [GXH]
-- Rotation engine    [WQH]
-  - Map for different slots    [WQH]
-- Route programming    [LYK/WQH]
+- ~~Rotation engine    [WQH]
+  - ~~Map for different slots    [WQH]
+- ~~Route programming    [LYK/WQH]
 ### Milestone 1
-- Ticket    [WZY]
-- Price Calculation    [WZY]
+- ~~Ticket    [WZY]
+- ~~Price Calculation    [WZY]
 - Find an empty slot    [?]
 ### Milestone 2
 - ~~Basic shapes    [LYK]~~
 - ~~Figure: vehicles    [LYK]~~
-- Normal parking lot  [LYK]
-- Rule of normal parking lot  [GXH]
+- ~~Normal parking lot  [LYK]
+- ~~Rule of normal parking lot  [GXH]
 - Placeholder  [WZY]
 ### Final submission
 - fix main.c and Canvas    [WQH]
@@ -78,10 +84,10 @@ Wu Qinhang 518370910041
 ### Bonus
 - Trajectory recording    [WQH] [pending]
   - simulate the dust tracks; implemented with queue
-- Motion: moving flag
+- ~~Motion: moving flag    [WQH]
 - fix inheritance relationship
 - clean the code
-- Motion: teleported (polygon teleporter)
+- ~~Motion: teleported (polygon teleporter)    [LYKKK]
 - Advanced user interface
   
 ### Final Checklist
