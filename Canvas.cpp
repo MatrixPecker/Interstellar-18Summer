@@ -157,6 +157,7 @@ Canvas::Canvas() {
         if(v[i]->gettype() == TYPE_TELEPORTED){
             v[i]->setpos(c->LOTCENTER[v[i]->getassignedslot()-1]); // assign initcenter here! (teleported)
             v[i]->setstatus(LOT_INWAITING);
+            v[i]->setintime(0);
         }
     }
     for(int i=0;i<vnum;i++) v[i]->reset(); // corresponding with rescale
@@ -226,11 +227,12 @@ void Canvas::change(){
             parkOUT(i);
         }
         if(bartime > 3000) bartime-=1000;
-        if(timenow == v[i]->getintime() && bartime>(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep+200) {bartime=0;}
-
+        if(timenow == v[i]->getintime() && bartime>=80+(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep+150) {bartime=0;}
+        if(timenow == v[i]->getintime() && bartime>170 && bartime<80+(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep+120){bartime-=60;}
+        if(timenow == v[i]->getintime() && bartime>140 && bartime<=170){bartime-=30;}
     }
-    if(bartime>80&&bartime<=110) bar[0]->rotate({-0.86,-0.4}, -3);
-    if(bartime>=80+(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep+90 && bartime<80+(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep+120)
+    if(bartime>80&&bartime<=110) {bar[0]->rotate({-0.86,-0.4}, -3);}
+    if(bartime>=80+(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep+120 && bartime<80+(c->LNG_IN_0.y-c->INITCENTER.y)/linearstep+150)
         bar[0]->rotate({-0.86,-0.4}, 3);
     bartime++;
 }
