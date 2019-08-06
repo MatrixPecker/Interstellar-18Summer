@@ -59,23 +59,23 @@ Wu Qinhang 518370910041
 - ~~Engine: Vec, Rotate    [WQH]~~
 - First Part of the Parkinglot (the design of a generic parking lot)    [GXH/LYK]
 - ~~Figure: Parkinglot    [LYK]~~
-  - ~~Layer design & fix    [LYK]
-- ~~Size & Scale fix    [?]
-- ~~Shape: barrier blocking    [?]
-- ~~Shape: bicycle, motorbike, car    [?]
+  - ~~Layer design & fix    [LYK]~~
+- ~~Size & Scale fix    [?]~~
+- ~~Shape: barrier blocking    [?]~~
+- ~~Shape: bicycle, motorbike, car    [?]~~
 - README maintenance    [GXH]
-- ~~Rotation engine    [WQH]
-  - ~~Map for different slots    [WQH]
-- ~~Route programming    [LYK/WQH]
+- ~~Rotation engine    [WQH]~~
+  - ~~Map for different slots    [WQH]~~
+- ~~Route programming    [LYK/WQH]~~
 ### Milestone 1
-- ~~Ticket    [WZY]
-- ~~Price Calculation    [WZY]
+- ~~Ticket    [WZY]~~
+- ~~Price Calculation    [WZY]~~
 - Find an empty slot    [?]
 ### Milestone 2
 - ~~Basic shapes    [LYK]~~
 - ~~Figure: vehicles    [LYK]~~
-- ~~Normal parking lot  [LYK]
-- ~~Rule of normal parking lot  [GXH]
+- ~~Normal parking lot  [LYK]~~
+- ~~Rule of normal parking lot  [GXH]~~
 - Placeholder  [WZY]
 ### Final submission
 - fix main.c and Canvas    [WQH]
@@ -84,10 +84,10 @@ Wu Qinhang 518370910041
 ### Bonus
 - Trajectory recording    [WQH] [pending]
   - simulate the dust tracks; implemented with queue
-- ~~Motion: moving flag    [WQH]
+- ~~Motion: moving flag    [WQH]~~
 - fix inheritance relationship
 - clean the code
-- ~~Motion: teleported (polygon teleporter)    [LYKKK]
+- ~~Motion: teleported (polygon teleporter)    [LYKKK]~~
 - Advanced user interface
   
 ### Final Checklist
