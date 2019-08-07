@@ -36,18 +36,8 @@ public:
 /* Traditional way of controlling figures (set x/y/rot, reset, draw) */
     virtual void reset()=0;
     void setpos(Point pos);
-    double getinrot(); // get the inner rotational angle
-    void setinrot(double a); // set the inner rotational angle
-    void changeinrot(double a); // change the inner rotational angle
-    void moveln(double *dx,double *dy,double lnx,double lny);
-    void moveup(double *dx,double *dy);
-    void movedown(double *dx,double *dy);
-    void moveleft(double *dx,double *dy);
-    void moveright(double *dx,double *dy);
-    void zoom(double *width,double *height,double *owidth,double *Radii);
+
 /*Posotion control*/
-    virtual void printin(Point position,int time)=0;
-    virtual void printout(int time)=0;
     int getintime();
     int getouttime();
     void setintime(int time);
@@ -61,8 +51,6 @@ public:
 /*Others*/
     Vehicle();
     virtual ~Vehicle();
-/*Debug*/
-    Point getcenter();
 protected:
     Point p; // center position
     double w,h,o,R; // Geometric feature
@@ -71,8 +59,6 @@ protected:
     int assignedslot;
     int status;
     int vtype;
-    void zoomout(double *width,double *height,double *owidth,double *Radii);
-    void zoomin(double *width,double *height,double *owidth,double *Radii);
     void paint(float *r, float *g, float *b);
 };
 
@@ -87,8 +73,6 @@ public:
     void supermove(double dx, double dy);
     void rotate(Point center, double degree);
     void Crotate(double degree); // rotate around the center of this vehicle.
-    void printin(Point position,int time);
-    void printout(int time);
 private:
     Shape *sh[6];
     int intime,outtime,price; // repeated definition here. fix that later.
@@ -101,8 +85,6 @@ public:
     void reset();
     void draw();
     void supermove(double dx, double dy);
-    void printin(Point position,int time);
-    void printout(int time);
     void rotate(Point center, double degree);
     void Crotate(double degree);
     void magic();
@@ -120,8 +102,6 @@ public:
     void supermove(double dx, double dy);
     void rotate(Point center, double degree);
     void Crotate(double degree);
-    void printin(Point position,int time);
-    void printout(int time);
     void debugg(); // only for debug
 private:
     Shape *sh[5];
@@ -138,8 +118,6 @@ public:
     void supermove(double dx, double dy);
     void rotate(Point center, double degree);
     void Crotate(double degree);
-    void printin(Point position,int time);
-    void printout(int time);
 private:
     Shape *sh[8];
     int intime,outtime,price;

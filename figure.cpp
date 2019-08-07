@@ -15,7 +15,6 @@ void Vehicle::paint(float *r, float *g, float *b) {
     *b=(float)rand()/RAND_MAX;
 }
 /* Dynamic way of controlling figures (static figures) */
-//void Vehicle::supermove(double dx, double dy)
 void Vehicle::rescale(double coefficient) {
     w *= coefficient;
     h *= coefficient;
@@ -25,38 +24,7 @@ void Vehicle::rescale(double coefficient) {
 void Vehicle::setpos(Point pos){
     p.x=pos.x; p.y=pos.y;
 }
-void Vehicle::zoom(double *width, double *height, double *owidth,double *Radii){
-    int static i=0;
-    if(h>=0.1 && i==0) zoomout(width, height, owidth,Radii);
-    else if (h<=2) { i=1; zoomin(width, height, owidth,Radii); }
-    else i=0;
-}
-void Vehicle::zoomout(double *width, double *height, double *owidth,double *Radii){
-    h/=1.01; *height=h; w/=1.01; *width=w; o/=1.01; *owidth=o;R/=1.01;*Radii=R;
-}
-void Vehicle::zoomin(double *width, double *height, double *owidth,double *Radii){
-    h*=1.01; *height=h; w*=1.01; *width=w; o*=1.01; *owidth=o;R*=1.01;*Radii=R;
-}
 
-/* Standard way of controlling figures (set x/y/rot, reset, draw) */
-double Vehicle::getinrot() {return inrot;}
-void Vehicle::setinrot(double a) {inrot = a;}
-void Vehicle::changeinrot(double a) {inrot += a;}
-void Vehicle::moveln(double *dx,double *dy,double lnx,double lny){
-    p.x+=lnx;*dx=p.x;p.y+=lny;*dy=p.y;
-}
-void Vehicle::moveup(double *dx, double *dy) {
-    p.x+=0;*dx=p.x;p.y+=0.01;*dy=p.y;
-}
-void Vehicle::movedown(double *dx, double *dy) {
-    p.x+=0;*dx=p.x;p.y-=0.01;*dy=p.y;
-}
-void Vehicle::moveleft(double *dx, double *dy) {
-    p.x-=0.01;*dx=p.x;p.y+=0;*dy=p.y;
-}
-void Vehicle::moveright(double *dx, double *dy) {
-    p.x+=0.01;*dx=p.x;p.y+=0;*dy=p.y;
-}
 /* Other figure-related functions */
 void Vehicle::setintime(int time){
     intime = time;
@@ -76,7 +44,7 @@ int Vehicle::getstatus() {return status;}
 void Vehicle::setstatus(int s) {status=s;}
 void Vehicle::settype(int t){vtype=t;}
 int Vehicle::gettype(){return vtype;}
-Point Vehicle::getcenter() {return p;}
+
 Vehicle::Vehicle(){
     status = LOT_WAITING;
 }
@@ -136,35 +104,11 @@ void Car::rotate(Point center, double degree){
     rotateVec(&p,center,degree);
     for(int i=0;i<6;i++) sh[i]->rotate(center,degree);
     inrot+=degree;
-    /*rot backwards*/
-//    Crotate(degree);
-    /*addup inrot*/
-//    inrot += degree;
+
 }
 void Car::Crotate(double degree){for(int i=0;i<6;i++) sh[i]->rotate(p,degree);inrot+=degree;}
 void Car::draw() {magicflag(); reset(); for(int i=0;i<6;i++) sh[i]->draw();}
 
-void Car::printin(Point position,int time){
-    // Something goes wrong. Come back and revise that later. -- wqh
-//    Car::intime=time;
-//    cout<<"*************Arrival ticket*************"<<endl;
-//    cout<<"* Arrival time: "<<getintime(time)<<endl;
-//    cout<<"* Type of vehicle: Car "<<endl;
-//    cout<<"* Empty slot: "<<position.x<<","<<position.y<<endl;
-//    cout<<"****************************************"<<endl;
-}
-
-void Car::printout(int time) {
-    // Something goes wrong. Come back and revise that later. -- wqh
-//    Car::outtime = time;
-//    int totaltime = Car::outtime - Car::intime;
-////    double price = totaltime * Car::price;             //different car should have different price standards.
-//    cout << "*************Departure ticket*************" << endl;
-//    cout << "* Time spent: " << totaltime << endl;
-//    cout << "* Price: " << totaltime * Car::price << endl;
-//    cout << "* Type of vehicle: Car" << endl;
-//    cout << "******************************************" << endl;
-}
 
 Teleported::Teleported(Point pt1,double width,double height) {
     float r,g,b;Point p1,p2;
@@ -190,26 +134,6 @@ void Teleported::draw() {
     Crotate(inrot);sh->draw();}
 void Teleported::rotate(Point center, double degree){sh->rotate(center,degree);rotateVec(&p,center,degree);}
 void Teleported::Crotate(double degree){sh->rotate(p,degree);}
-
-void Teleported::printin(Point position,int time){
-//    Teleported::intime=time;
-//    cout<<"*************Arrival ticket*************"<<endl;
-//    cout<<"* Arrival time: "<<getintime(time)<<endl;
-//    cout<<"* Type of vehicle: Teleported "<<endl;
-//    cout<<"* Empty slot: "<<position.x<<","<<position.y<<endl;
-//    cout<<"****************************************"<<endl;
-}    
-    
-void Teleported::printout(int time) {
-//    Teleported::outtime = time;
-//    int totaltime = Teleported::outtime - Teleported::intime;
-////    double price = totaltime * Teleported::price;             //different car should have different price standards.
-//    cout << "*************Departure ticket*************" << endl;
-//    cout << "* Time spent: " << totaltime << endl;
-//    cout << "* Price: " << totaltime * Teleported::price << endl;
-//    cout << "* Type of vehicle: Teleported" << endl;
-//    cout << "******************************************" << endl;
-}
 
 void Teleported::magic() {
     int ran=rand()%3;
@@ -279,26 +203,6 @@ void UFO::draw() {
     for (int i=0;i<=4;i++) sh[i]->draw();
 }
 
-void UFO::printin(Point position,int time){
-//    UFO::intime=time;
-//    cout<<"*************Arrival ticket*************"<<endl;
-//    cout<<"* Arrival time: "<<getintime(time)<<endl;
-//    cout<<"* Type of vehicle: UFO "<<endl;
-//    cout<<"* Empty slot: "<<position.x<<","<<position.y<<endl;
-//    cout<<"****************************************"<<endl;
-}    
-    
-void UFO::printout(int time) {
-//    UFO::outtime = time;
-//    int totaltime = UFO::outtime - UFO::intime;
-////    double price = totaltime * UFO::price;             //different car should have different price standards.
-//    cout << "*************Departure ticket*************" << endl;
-//    cout << "* Time spent: " << totaltime << endl;
-//    cout << "* Price: " << totaltime * UFO::price << endl;
-//    cout << "* Type of vehicle: UFO" << endl;
-//    cout << "******************************************" << endl;
-}
-    
 Spacecraft::Spacecraft(Point pt1, double width, double height, double owidth) {
     float r,g,b;Point p1,p2,p3,p4;
     p=pt1;w=width;h=height;o=owidth;R=-1;
@@ -360,26 +264,6 @@ void Spacecraft::autorescale() {
     else rescale (1.030928); // parameter assigned
     rescalestatus++;rescalestatus=rescalestatus%200;
 }
-void Spacecraft::printin(Point position,int time){
-//    Spacecraft::intime=time;
-//    cout<<"*************Arrival ticket*************"<<endl;
-//    cout<<"* Arrival time: "<<getintime(time)<<endl;
-//    cout<<"* Type of vehicle: Spacecraft "<<endl;
-//    cout<<"* Empty slot: "<<position.x<<","<<position.y<<endl;
-//    cout<<"****************************************"<<endl;
-}    
-    
-void Spacecraft::printout(int time) {
-//    Spacecraft::outtime = time;
-//    int totaltime = Spacecraft::outtime - Spacecraft::intime;
-////    double price = totaltime * Spacecraft::price;             //different car should have different price standards.
-//    cout << "*************Departure ticket*************" << endl;
-//    cout << "* Time spent: " << totaltime << endl;
-//    cout << "* Price: " << totaltime * Spacecraft::price << endl;
-//    cout << "* Type of vehicle: Spacecraft" << endl;
-//    cout << "******************************************" << endl;
-}
-
 Occupy::Occupy(Point pt){
     p = pt;
     oc[0]=new class Line({p.x-.05,p.y-.05},{p.x+.05,p.y+.05},1,0,0);

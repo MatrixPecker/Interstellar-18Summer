@@ -25,10 +25,10 @@ void Canvas::settmptype(int *temtype,int num) {
 void Canvas::settmptime(int *tmpin, int *tmpout, int num) {
     int ran=0;
     srand(time(NULL));
-    tmpin[0]=0;tmpin[1]=0;tmpin[2]=0;tmpin[3]=0;tmpin[4]=125;tmpin[5]=325;
+    tmpin[0]=0;tmpin[1]=0;tmpin[2]=0;tmpin[3]=100;tmpin[4]=175;tmpin[5]=400;
     tmpout[0]=9000;tmpout[1]=9000;tmpout[2]=9000;tmpout[3]=9000;tmpout[4]=9000;tmpout[5]=9000;
     for (int i=6;i<num;i++){
-        ran=rand()%200+(i-3)*200;
+        ran=rand()%50+(i-3)*350+100;
         tmpin[i]=ran;
         do {
             ran=rand()%(vnum*2000);
@@ -213,9 +213,8 @@ Canvas::Canvas() {
     bar[1] = new Line ({-0.96,0.4},{-0.86,0.4},1,0,0); // OUT_BAR
 /* Set Occupied */
     int ocnt = 0;
-    for(int i=0;i<23;i++) if(!c->is_occupied[i]){
-        if(i==0)oc[ocnt] = new Occupy (c->LOTCENTER[22]);
-        else oc[ocnt] = new Occupy (c->LOTCENTER[i-1]);
+    for(int i=1;i<=23;i++) if(!c->is_occupied[i]){
+        oc[ocnt] = new Occupy (c->LOTCENTER[i-1]);
         ocnt++;
     }
 }
