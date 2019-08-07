@@ -144,4 +144,13 @@ private:
     Shape *sh[8];
     int intime,outtime,price;
 };
+class Occupy{
+private:
+    Point p;
+    Shape *oc[2];
+public:
+    Occupy(Point pt);
+    ~Occupy();
+    void draw();
+};
 #endif //HWX_FIGURE_H

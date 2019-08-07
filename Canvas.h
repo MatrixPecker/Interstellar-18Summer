@@ -8,6 +8,7 @@
 #include "parkinglot.h"
 #include "figure.h"
 #include "Vec.h"
+#include <iostream>
 #include <cmath>
 #include <ctime>
 
@@ -71,6 +72,7 @@ private:
     Parkinglot park;
     Vehicle *v[50];
     Line *bar[2];
+    Occupy *oc[23];
     int vnum; // total number of active vehicles
     Cdata *c; // coordinate map
     double linearstep;

@@ -41,6 +41,7 @@ void Canvas::settmplot(int *tmplot, int num) {
     bool judge=true;
     srand(time(NULL));
     tmplot[0]=rand()%23+1;
+    c->is_occupied[tmplot[0]] = true;
     for (int i=1;i<num;i++){
         do{
         ran=rand()%23+1;
@@ -53,6 +54,7 @@ void Canvas::settmplot(int *tmplot, int num) {
         }
         }while (judge==false);
         tmplot[i]=ran;
+        c->is_occupied[ran] = true;
     }
 }
 Canvas::Canvas() {
@@ -113,7 +115,10 @@ Canvas::Canvas() {
     for(int i=0;i<5;i++) c->SLNG_SEC6A[i]=pa5[i];
 
 /* Set Vehicles */
-    vnum = 18;
+    int inputv; // vnum = 18;
+    std::cout << "*** Welcome to Interstellar! *** \nPlease input the number of slots in the parking lot (at least 10, at most 23): ";
+    std::cin >> inputv; if(inputv<=10)inputv=10;else if(inputv>=23)inputv=23;
+    vnum=inputv;
     int *tmptype=new int[vnum];
     settmptype(tmptype,vnum);
     for(int i=0;i<vnum;i++) {
@@ -206,6 +211,13 @@ Canvas::Canvas() {
     is_OUTBARraised = false;
     bar[0] = new Line ({-0.96,-0.4},{-0.86,-0.4},1,0,0); // IN_BAR
     bar[1] = new Line ({-0.96,0.4},{-0.86,0.4},1,0,0); // OUT_BAR
+/* Set Occupied */
+    int ocnt = 0;
+    for(int i=0;i<23;i++) if(!c->is_occupied[i]){
+        if(i==0)oc[ocnt] = new Occupy (c->LOTCENTER[22]);
+        else oc[ocnt] = new Occupy (c->LOTCENTER[i-1]);
+        ocnt++;
+    }
 }
 Canvas::~Canvas() {
     for(int i=0;i<vnum;i++) delete v[i]; // delete[] v; // for(int i=0;i<vnum;i++) delete v[i]; // Problem here...
@@ -216,6 +228,7 @@ void Canvas::draw() {
     park.parkdraw();
     bar[0]->draw(); bar[1]->draw();
     for(int i=0;i<vnum;i++) v[i]->draw();
+    for(int i=0;i<23-vnum;i++) oc[i]->draw();
 }
 void Canvas::change(){
     static int bartime = 0;

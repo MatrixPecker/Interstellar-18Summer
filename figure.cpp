@@ -123,8 +123,8 @@ void Car::reset(){
 }
 void Car::magicflag(){
     static int rescalestatus = 0;
-    if(rescalestatus%400 < 200) flaglng+=0.001;
-    else flaglng-=0.001;
+    if(rescalestatus%400 < 200) flaglng+=0.0007;
+    else flaglng-=0.0007;
     rescalestatus++;rescalestatus=rescalestatus%400;
 }
 void Car::supermove(double dx, double dy){
@@ -379,3 +379,11 @@ void Spacecraft::printout(int time) {
 //    cout << "* Type of vehicle: Spacecraft" << endl;
 //    cout << "******************************************" << endl;
 }
+
+Occupy::Occupy(Point pt){
+    p = pt;
+    oc[0]=new class Line({p.x-.05,p.y-.05},{p.x+.05,p.y+.05},1,0,0);
+    oc[1]=new class Line({p.x-.05,p.y+.05},{p.x+.05,p.y-.05},1,0,0);
+}
+Occupy::~Occupy(){for(int i=0;i<2;i++) delete oc[i];}
+void Occupy::draw() {for(int i=0;i<2;i++) oc[i]->draw();}
