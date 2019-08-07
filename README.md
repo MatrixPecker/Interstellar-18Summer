@@ -61,16 +61,16 @@ Wu Qinhang 518370910041
 - ~~Figure: Parkinglot    [LYK]~~
   - ~~Layer design & fix    [LYK]~~
 - ~~Size & Scale fix    [?]~~
-- ~~Shape: barrier blocking    [?]~~
+- ~~Shape: barrier blocking    [GXH]~~
 - ~~Shape: bicycle, motorbike, car    [?]~~
 - README maintenance    [GXH]
 - ~~Rotation engine    [WQH]~~
   - ~~Map for different slots    [WQH]~~
-- ~~Route programming    [LYK/WQH]~~
+- ~~Route programming    [WQH]~~
 ### Milestone 1
 - ~~Ticket    [WZY]~~
-- ~~Price Calculation    [WZY]~~
-- Find an empty slot    [?]
+- ~~Price Calculation    [LYK/WZY]~~
+- Find an empty slot    [LYK/WZY]
 ### Milestone 2
 - ~~Basic shapes    [LYK]~~
 - ~~Figure: vehicles    [LYK]~~
