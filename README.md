@@ -126,9 +126,9 @@ After that, if the user wants the car to leave at the fifth round, an departure 
 *which includes how long this kind of car was parked and how much it cost.
 
 ## Rules of Interstellar Parking Lot
-At the beginning, users are allowed to set the slots in the parking lot.It should be an integer larger than or equal to 10 and smaller than or equal to 23.Then, the allowed number of slots are available and the others have a cross on them.  
+At the beginning, users are allowed to set the slots in the parking lot. It should be an integer larger than or equal to 10 and smaller than or equal to 23. Then, the allowed number of slots will be available and the others will have a cross on them.  
 We randomly generate cars, spacecrafts, UFOs and teleported at different time.  
-Teleported are put on the slots at the beginning. Others come into the slots one by one.The UFOs are rotating and the spacecrafts are zooming. The cars have flags floating up and down on them.   
+Teleported are put on the slots at the beginning. Others come into the slots one by one. The UFOs are rotating and the spacecrafts are zooming. The cars have flags floating up and down on them.   
 After all slots are occupied, the game ends.
 
 ## Bonus
