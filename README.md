@@ -101,7 +101,7 @@ Wu Qinhang 518370910041
 ![Inheritance Relationship:](https://github.com/MatrixPecker/Interstellar-18Summer/blob/master/IR.jpg)
 All the vehicles inherit from a fundamental class and two kinds of carports inherit from a general carport class.
 The motivation is that all the vehicles have some common functions such as move and print tickets, and so do the carports. Thus, it is more efficient to use inheritance relationship.
-- Our interstellar parking lot is designed to be 2 floors, 20 slots in total. All the carports are identical. We consider it to be the size big enough to make full use of all functions and cute enough for the whole process to be clear and concise.
+- Our interstellar parking lot is designed to be 2 floors, 23 slots in total. All the carports are identical. We consider it to be the size big enough to make full use of all functions and cute enough for the whole process to be clear and concise.
 - There are four kinds of vehicles, car, teleported, UFO and spacecraft, each with its standard functions.
 
 
@@ -109,9 +109,9 @@ The motivation is that all the vehicles have some common functions such as move 
 - Color matching for every car
 
 ## Rule of normal parking lot
-User has three options, which are Enter 1 to begin the autoshow, Enter 2 to play the game and Enter other numbers to break.
-Before the game begining, user can choose how many slots he/she wants(the number should between 5 and 100), how many rounds he/she wants(the number should between 1 and 20).
-When the first round begin, the user can let cars come in and choose which round the car will leave. More than one car or no car can come at one round. One round ends when user enters 0. After the car coming in, an arrival ticket will be provided like 
+- User has three options, which are Enter 1 to begin the autoshow, Enter 2 to play the game and Enter other numbers to break.
+- Before the game begins, user can choose how many slots he/she wants(the number should between 5 and 100), how many rounds he/she wants(the number should between 1 and 20).
+- When the first round begin, the user can let cars come in and choose which round the car will leave. More than one car or no car can come at one round. One round ends when user enters 0. After the car coming in, an arrival ticket will be provided like 
              **Arrival ticket**
 * Arrival time: 1
 * Type of vehicle: Motorbike
@@ -127,16 +127,16 @@ After that, if the user wants the car to leave at the fifth round, an departure 
 *which includes how long this kind of car was parked and how much it cost.
 
 ## Rule for OpenGL parkinglot
-At the beginning, users are allowed to set the slots in the parking lot.
+- At the beginning, users are allowed to set the slots in the parking lot.
 It should be an integer larger than or equal to 10 and smaller than or equal to 23.
-Then, the allowed number of slots are used and the others has a cross on it.
-We randomly generate cars, spacecrafts, UFOs and teleported in different time.
+Then, the allowed number of slots are available and the others have a cross on them.
+- We randomly generate cars, spacecrafts, UFOs and teleported at different time.
 Teleported are put on the slots at the beginning. Others come into the slots one by one.
-The UFOs are rotating and the spacecrafts are zooming. The cars have flags floating up and down on them.
+- The UFOs are rotating and the spacecrafts are zooming. The cars have flags floating up and down on them.
 After all slots are occupied, the game ends.
 
-Bonus:
-1.All types of vehicles can enter the parkinglot.
-2. The cars have flags on it.
-3. Teleporteds have different shapes.
-4. Every slots can have a vehicle.
+## Bonus
+- All types of vehicles can enter the parking lot.
+- The cars have flags on them.
+- The teleported have different shapes.
+- Every slot can have a vehicle.
