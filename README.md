@@ -106,8 +106,7 @@ The motivation is that all the vehicles have some common functions such as move 
 
 
 ## Highlights
-- Color matching for every car
-
+- In the interstellar parking lot, the cars have yellow tails behind them when they proceed, which act as the exhaust.
 ## Rules of Normal Parking Lot
 User has three options, which are Enter 1 to begin the autoshow, Enter 2 to play the game and Enter other numbers to break.Before the game begins, user can choose how many slots he/she wants(the number should between 5 and 100), how many rounds he/she wants(the number should between 1 and 20).  
 When the first round begin, the user can let cars come in and choose which round the car will leave. More than one car or no car can come at one round. One round ends when user enters 0. After the car coming in, an arrival ticket will be provided like   
