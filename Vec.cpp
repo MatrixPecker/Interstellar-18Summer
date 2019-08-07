@@ -28,3 +28,6 @@ void zoomVec(Point *p, double rate){
     p->x *= rate;
     p->y *= rate;
 }
+double getdistance(Point a, Point b){
+    return sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));
+}

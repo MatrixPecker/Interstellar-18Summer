@@ -73,6 +73,7 @@ Car::Car(Point pt1, double width,
     sh[5]=new class Triangle({p.x-1*w/3,p.y-h/3+o+flaglng+o},{p.x-1*w/3,p.y-h/3+2*o+flaglng+o},{p.x-1*w/3+o,p.y-h/3+1.5*o+flaglng+o},1,0,0);
     inrot = 90;// counter-clockwise 90 degrees
     flaglng = 0;
+    tc={-0.92,-1.3};tcflag=0;anflag=0;
 }
 Car::~Car() {for(int i=0;i<6;i++) delete sh[i];}
 void Car::reset(){
@@ -98,17 +99,24 @@ void Car::magicflag(){
 void Car::supermove(double dx, double dy){
     p.x+=dx; p.y+=dy;
     for(int i=0;i<6;i++) sh[i]->supermove(dx,dy);
+    acx=dx;acy=dy;
 }
 void Car::rotate(Point center, double degree){
     /*move*/
+    acx=(p.x-tc.x)/15;acy=(p.y-tc.y)/15;
     rotateVec(&p,center,degree);
     for(int i=0;i<6;i++) sh[i]->rotate(center,degree);
     inrot+=degree;
-
+    if((int)inrot % 90==0)anflag=1;
 }
 void Car::Crotate(double degree){for(int i=0;i<6;i++) sh[i]->rotate(p,degree);inrot+=degree;}
-void Car::draw() {magicflag(); reset(); for(int i=0;i<6;i++) sh[i]->draw();}
-
+void Car::draw() {
+    if(anflag){tc=p;anflag=0;}
+    if(getdistance(tc,p)>=0.35){tcflag=1; tc.x+=acx; tc.y+=acy;}
+    if(tcflag && getdistance(tc,p)>=0.04) {tc.x+=acx; tc.y+=acy;if(tcflag && getdistance(tc,p)<=0.04) tcflag=0;}
+    Line tmp(tc,p,0.95,0.81,0); tmp.draw();
+    magicflag(); reset(); for(int i=0;i<6;i++) sh[i]->draw();
+}
 
 Teleported::Teleported(Point pt1,double width,double height) {
     float r,g,b;Point p1,p2;

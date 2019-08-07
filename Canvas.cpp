@@ -222,6 +222,7 @@ Canvas::~Canvas() {
     for(int i=0;i<vnum;i++) delete v[i]; // delete[] v; // for(int i=0;i<vnum;i++) delete v[i]; // Problem here...
     delete bar[0]; delete bar[1];
     delete c;
+    for(int i=0;i<23-vnum;i++) delete oc[i];
 }
 void Canvas::draw() {
     park.parkdraw();

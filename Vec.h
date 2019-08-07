@@ -16,5 +16,6 @@ void printVec(Point p); // only for debug
 void moveVec(Point *p, Point dir);
 void rotateVec(Point *p, Point center, double degree);
 void zoomVec(Point *p, double rate);
+double getdistance(Point a, Point b);
 
 #endif //P3_G8_VEC_H

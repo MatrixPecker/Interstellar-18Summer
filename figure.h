@@ -77,6 +77,10 @@ private:
     Shape *sh[6];
     int intime,outtime,price; // repeated definition here. fix that later.
     double flaglng;
+    Point tc;  // trace position
+    double acx,acy;
+    int tcflag;
+    int anflag;
 };
 class Teleported:public Vehicle{
 public:
