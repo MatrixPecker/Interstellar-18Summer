@@ -1,15 +1,12 @@
 # Interstellar - Group 0E0W
-Interstellar Parking Lot for Vg101, 18 Summer
+Interstellar Parking Lot for Intro. to Computer & Programming, 18 Summer
 
 **Contributors:**
 
-Gu Xihe    518370910093
-
-Lou Yukun  518021910263
-
-Wang Ziyi  518370910073
-
-Wu Qinhang 518370910041
+Gu Xihe <br>
+Lou Yukun <br> 
+Wang Ziyi <br>
+Wu Qinhang <br>
 
 **Version: Final Submission (Aug. 7)**
 
